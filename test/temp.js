@@ -2,7 +2,7 @@ $(()=>{
     $("button").click(function(e){
         $('.display').remove();
         var formData = new FormData();
-        formData.append('num',0);
+        formData.append('num',$("button").val());
         $.ajax({
             url: "bottone.php",
             type: "POST",

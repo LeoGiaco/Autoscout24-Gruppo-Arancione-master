@@ -76,7 +76,7 @@
         <script src="temp.js"></script>
     </head>
     <body>
-        <button>Ciao</button>        
+        <button value="0">Ciao</button>        
     </body>
 </html>
 
