@@ -17,6 +17,7 @@ $(()=>{
         $('.modify').remove();
         var formData = new FormData();
         formData.append('num',$(e.target).val());
+        formData.append('action',"modify");
         $.ajax({
             url: "bottone.php",
             type: "POST",
@@ -31,6 +32,7 @@ $(()=>{
         $('.create').remove();
         var formData = new FormData();
         formData.append('num',$(e.target).val());
+        formData.append('action',"create");
         $.ajax({
             url: "bottone.php",
             type: "POST",
