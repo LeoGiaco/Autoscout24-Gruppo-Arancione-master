@@ -1,4 +1,6 @@
-
+.body{
+    background-color: blue;
+}
 .btnvisibilita
 {
     visibility: hidden;
@@ -9,7 +11,7 @@
 }
 .btn
 {
- margin-bottom: 2px;
+    margin: 0px;
 }
 
 .item{
@@ -17,9 +19,34 @@
     border-radius: 2px;
 }
 .prova{
-    border: 1px solid rgba(202, 38, 38, 0.76);
+    border: 1px solid black;
     border-radius: 3px;
+    background-color: white;
 }
+
+ul{
+    padding-left:0px;
+}
+
+.ex1 {
+    margin:5px 0px 0px 5px;
+
+    height: 733px;
+    overflow-y:scroll;
+  }
+  .ex2 {
+    margin:5px 0px 0px 5px;
+    height: 633px;
+    overflow-y:scroll;
+  }
+
+.tblbutton{
+    margin: 5px 0px 0px 5px;
+}
+
+/* .btnnuovo{
+    visibility: hidden;
+} */
 
 
 

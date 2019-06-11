@@ -74,9 +74,9 @@
         {
             // echo "<p class='display'>.$row[$column].</p>";
             echo "<li class='item row'><div class='col-sm-8'>".$row[$column]."</div>
-            <button type='button' class='btnvisibilita btn btn-outline-primary modifica col-sm-2' data-toggle='modal'
+            <button type='button' class='btnvisibilita btn btn-outline-primary modifica col-sm-1' data-toggle='modal'
               data-target='#Modalmodifica'><i class='fas fa-cogs'></i></button>
-            <button type='button 'class='btnvisibilita btn btn-outline-primary delete col-sm-2 'data-toggle='modal'
+            <button type='button 'class='btnvisibilita btn btn-outline-primary delete col-sm-1 'data-toggle='modal'
               data-target='#ModlaDelete'><i class='far fa-trash-alt'></i></button>
           </li>";
         }

@@ -25,7 +25,7 @@
         $val = 0;
         foreach($rows as $row)
         {
-            echo "<button class='tblbutton btn btn-outline-primary' value = '$val' id=" . $row['table_name'] . ">" . $row['table_name'] . "</button><br />";
+            echo "<button class='tblbutton btn btn-outline-primary' value = '$val' id=" . $row['table_name'] . ">" . $row['table_name'] . "</button>";
             $val++;
         }
     }
@@ -55,29 +55,23 @@
 
 </head>
 
-
-
-
-
-<body>
+<body class="body">
   <div class="container-fluid row">
-    <div class="list-group col-sm-3 column">
+    <div class=" offset-sm-1 list-group col-sm-3 column ex1 prova">
       <?php displayButtons(); ?>
     </div>
 
 
     <!-- contenitore -->
-    <div id="prova" class="container col-sm-8 row">
+    <div class="container col-sm-8 row">
       <div class="column offset-sm-1 col-sm-10 prova">
-        <!--Legen da + pulsante nuovo-->
+        <div class="ex2"><ul>
+        </ul>
+        </div>
         <div class="row">
-          <legend class=" col-sm-7 ">CAMBIO</legend>
-          <button type="button" class="btn col-sm-3 ml-auto btn-outline-primary" data-toggle="modal"
+        <button type="button"  class="btn offset-sm-5 col-sm-2 btn-outline-primary btnnuovo " data-toggle="modal"
             data-target="#Modalnew">Nuovo</button>
         </div>
-        <ul style="padding-left:0px;">
-
-        </ul>
       </div>
     </div>
     <!-- Modal modifica -->
@@ -144,6 +138,8 @@
       </div>
     </div>
   </div>
+
+
 
 
 
