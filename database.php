@@ -43,18 +43,16 @@
     $table = $tables[$_POST['num']]->table;
     $column = $tables[$_POST['num']]->column;
 
-    $sql = "SELECT * FROM :tabella";
+    $sql = "SELECT * FROM $table";
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':tabella', $table, PDO::PARAM_STR);
-
     $stmt->execute();
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach($rows as $row)
     {
-        echo $row[$column] . '<br />';
+        print $row[$column] . '<br />';
     }
-    
+
 
 ?>
