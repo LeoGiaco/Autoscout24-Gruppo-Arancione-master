@@ -3,7 +3,7 @@ $(()=>{
         var formData = new FormData();
         formData.append('num',0);
         $.ajax({
-            url: "database.php",
+            url: "bottone.php",
             type: "POST",
             data: formData,
             processData: false,
