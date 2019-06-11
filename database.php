@@ -40,11 +40,12 @@
 
     
 
-    $type = $tables[$_POST['num']];
+    $table = $tables[$_POST['num']]->$table;
+    $column = $tables[$_POST['num']]->$column;
 
     $sql = "SELECT * FROM :tabella WHERE AnnoNascita > :anno";
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':tabella', $type, PDO::PARAM_STR);
+    $stmt->bindValue(':tabella', $table, PDO::PARAM_STR);
     $stmt->bindValue(':anno', 0, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -52,7 +53,7 @@
 
     foreach($rows as $row)
     {
-        echo $row[] . '<br />';
+        echo $row[$column] . '<br />';
     }
     
 
