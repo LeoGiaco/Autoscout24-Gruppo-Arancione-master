@@ -46,9 +46,9 @@
 
     if(isset($_POST['num']))
     {
-        if(isset($_POST['num']))
+        if(isset($_POST['action']))
         {
-            switch($_POST['num'])
+            switch($_POST['action'])
             {
                 case "modify":
                     
@@ -78,20 +78,45 @@
 
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $names = implode('-',$columns);
-        echo "<legend>".$names."</legend>";
+        $part1 = "<table class='table table-striped'><thead><tr>";
+        foreach($columns as $col)
+            $part1 .= "<th scope='col'>".$col."</th>";
+        $part1 .="<th scope='col'>edit</th></tr></thead>";
 
+        echo $part1;
+
+        $part2 = "<tbody>";
         foreach($rows as $row)
-        {   
-            $total = implode(' - ', array_slice($row,0,5));
+        {
+            $part2 .= "<tr>";
 
-            echo "<li class='item row'><div class='col-sm-8'>".$total."</div>
-            <button type='button' class='btnvisibilita btn btn-outline-primary modifica col-sm-2' data-toggle='modal'
-              data-target='#Modalmodifica'><i class='fas fa-cogs'></i></button>
-            <button type='button 'class='btnvisibilita btn btn-outline-primary delete col-sm-2 'data-toggle='modal'
-              data-target='#ModalDelete'><i class='far fa-trash-alt'></i></button>
-            </li>";
+            $i = 0;
+            foreach($row as $col)
+            {
+                if($i++ < 5)
+                    $part2 .= "<td>".$col."</td>";
+                else
+                    break;
+            }
+            
+            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modifica ' data-toggle='modal'
+                    data-target='#modify'><i class='fas fa-cogs'></i></button>
+                  <button type='button 'class='btnvisibilita btn btn-outline-primary delete 'data-toggle='modal'
+                    data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
         }
+        echo $part2;
+
+        // foreach($rows as $row)
+        // {   
+        //     $total = implode(' - ', array_slice($row,0,5));
+
+        //     echo "<li class='item row'><div class='col-sm-8'>".$total."</div>
+        //     <button type='button' class='btnvisibilita btn btn-outline-primary modifica col-sm-2' data-toggle='modal'
+        //       data-target='#Modalmodifica'><i class='fas fa-cogs'></i></button>
+        //     <button type='button 'class='btnvisibilita btn btn-outline-primary delete col-sm-2 'data-toggle='modal'
+        //       data-target='#ModalDelete'><i class='far fa-trash-alt'></i></button>
+        //     </li>";
+        // }
     }
 
     function checkExistence($tableName)
@@ -110,6 +135,10 @@
         return -1;
     }
 
+    function create()
+    {
+        
+    }
 ?>
 
 
