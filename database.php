@@ -18,8 +18,8 @@
         public $column;
         function __construct($tb,$col)
         {
-            $table = $tb;
-            $column = $col;
+            $this->table = $tb;
+            $this->column = $col;
         }
     }
 
@@ -40,13 +40,13 @@
 
     
 
-    $table = $tables[$_POST['num']]->$table;
-    $column = $tables[$_POST['num']]->$column;
+    $table = $tables[$_POST['num']]->table;
+    $column = $tables[$_POST['num']]->column;
 
-    $sql = "SELECT * FROM :tabella WHERE AnnoNascita > :anno";
+    $sql = "SELECT * FROM :tabella";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':tabella', $table, PDO::PARAM_STR);
-    $stmt->bindValue(':anno', 0, PDO::PARAM_INT);
+
     $stmt->execute();
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
