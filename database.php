@@ -12,9 +12,33 @@
         die("Errore: " . $e->getMessage());  // Termina lo script.
     }
 
-    $tables = ["tblCambio","tblCarburanti","tblCarrozzerie","tblClasseEmissioni",
-                "tblColori","tblInterni","tblOptional","tblRegioni","tblStato",
-                "tblTipoProprietario","tblTrazione","tblVernici"];
+    class Pair
+    {
+        public $table;
+        public $column;
+        function __construct($tb,$col)
+        {
+            $table = $tb;
+            $column = $col;
+        }
+    }
+
+    $tables = [
+        new Pair("tblCambio", "TipoDiCambio"),
+        new Pair("tblCarburanti", "Carburante"),
+        new Pair("tblCarrozzerie", "TipoCarrozzeria"),
+        new Pair("tblClasseEmissioni", "Classe"),
+        new Pair("tblColori", "Colore"),
+        new Pair("tblInterni", "Interni"),
+        new Pair("tblOptional", "NomeOptional"),
+        new Pair("tblRegioni", "Regione"),
+        new Pair("tblStato", "Stato"),
+        new Pair("tblTipoProprietario", "TipoProprietario"),
+        new Pair("tblTrazione", "TipoDiTrazione"),
+        new Pair("tblVernici", "Vernice")
+    ];
+
+    
 
     $type = $tables[$_POST['num']];
 
@@ -25,12 +49,11 @@
     $stmt->execute();
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    usort($rows, "cmp");
 
     foreach($rows as $row)
     {
-        echo $row['Nome'] . ' - ' . $row['Cognome'] . ' - ' . $row['AnnoNascita'] . '<br />';
+        echo $row[] . '<br />';
     }
-
+    
 
 ?>
