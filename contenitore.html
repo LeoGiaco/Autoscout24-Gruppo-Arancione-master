@@ -17,18 +17,29 @@
 </head>
 
 <body>
-  <!-- contenitore -->
-  <div class="container">
-    <div class="row ">
-      <div class="column col-sm-4 ok">
+  <div class="container-fluid row">
+    <div class="list-group col-sm-3 column">
+        <button type="button" class="btn   btn-outline-primary" data-toggle="div"
+        data-target="#prova">prova1</button>
+      <button type="button" class="btn   btn-outline-primary" data-toggle="div"
+        data-target="#prova">prova2</button>
+      <button type="button" class="btn  btn-outline-primary" data-toggle="div"
+        data-target="#prova">prova3</button>
+      <button type="button" class="btn   btn-outline-primary" data-toggle="div"
+        data-target="#prova">prova4</button>
+    </div>
+
+
+    <!-- contenitore -->
+    <div id="prova" class="container col-sm-8 row">
+      <div class="column offset-sm-1 col-sm-10 prova">
         <!--Legenda + pulsante nuovo-->
         <div class="row">
-          <legend class=" col-sm-7 offset-sm-1">CAMBIO</legend>
+          <legend class=" col-sm-7 ">CAMBIO</legend>
           <button type="button" class="btn col-sm-3 ml-auto btn-outline-primary" data-toggle="modal"
             data-target="#Modalnew">Nuovo</button>
         </div>
-
-        <ul>
+        <ul style="padding-left:0px;">
           <li class="item row">
             <div class="col-sm-8">manuale</div>
             <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
@@ -50,73 +61,141 @@
             <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
               data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
           </li>
+          <li class="item row">
+              <div class="col-sm-8">manuale</div>
+              <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+              <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+            </li>
+            <li class="item row">
+              <div class="col-sm-8">automatico</div>
+              <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+              <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+            </li>
+            <li class="item row">
+              <div class="col-sm-8">sequenziale</div>
+              <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+              <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+            </li>
+            <li class="item row">
+                <div class="col-sm-8">manuale</div>
+                <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                  data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+                <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                  data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+              </li>
+              <li class="item row">
+                <div class="col-sm-8">automatico</div>
+                <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                  data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+                <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                  data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+              </li>
+              <li class="item row">
+                <div class="col-sm-8">sequenziale</div>
+                <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                  data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+                <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                  data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+              </li>
+              <li class="item row">
+                  <div class="col-sm-8">manuale</div>
+                  <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                    data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+                  <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                    data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+                </li>
+                <li class="item row">
+                  <div class="col-sm-8">automatico</div>
+                  <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                    data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+                  <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                    data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+                </li>
+                <li class="item row">
+                  <div class="col-sm-8">sequenziale</div>
+                  <button type="button" class="btnvisibilita btn btn-outline-primary modifica col-sm-2" data-toggle="modal"
+                    data-target="#Modalmodifica"><i class="fas fa-cogs"></i></button>
+                  <button type="button" class="btnvisibilita btn btn-outline-primary delete col-sm-2" data-toggle="modal"
+                    data-target="#ModlaDelete"><i class="far fa-trash-alt"></i></button>
+                </li>
+                
         </ul>
       </div>
     </div>
-  </div>
-  <!-- Modal modifica -->
-  <div class="modal fade" id="Modalmodifica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modifica campo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <!-- Modal modifica -->
+    <div class="modal fade" id="Modalmodifica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modifica campo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body row">
+            <label for="exampleFormControlInput1" class="col-sm-3 ">Valore:</label>
+            <input type="text" class="form-control offset-sm-1 col-sm-8"
+              placeholder="trovare il modo per inserire il valore di prima">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
-        <div class="modal-body row">
-          <label for="exampleFormControlInput1" class="col-sm-3 ">Valore:</label>
-          <input type="text" class="form-control offset-sm-1 col-sm-8"
-            placeholder="trovare il modo per inserire il valore di prima">
+      </div>
+    </div>
+    <!-- Modal delete -->
+    <div class="modal fade" id="ModlaDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sicuro di voler eliminare?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO,Close</button>
+            <button type="button" class="btn btn-primary">YES</button>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    <!-- Modal crea -->
+    <div class="modal fade" id="Modalnew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nuovo campo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body row">
+            <label for="exampleFormControlInput1" class="col-sm-3 ">Valore:</label>
+            <input type="text" class="form-control offset-sm-1 col-sm-8">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Modal delete -->
-  <div class="modal fade" id="ModlaDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sicuro di voler eliminare?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">NO,Close</button>
-          <button type="button" class="btn btn-primary">YES</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal crea -->
-  <div class="modal fade" id="Modalnew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuovo campo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body row">
-          <label for="exampleFormControlInput1" class="col-sm-3 ">Valore:</label>
-          <input type="text" class="form-control offset-sm-1 col-sm-8">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
+
+
 
 
   <!-- Optional JavaScript -->
