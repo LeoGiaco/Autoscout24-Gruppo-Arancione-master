@@ -1,0 +1,18 @@
+
+.btnvisibilita
+{
+    visibility: hidden;
+}
+
+.item:hover .btnvisibilita{
+    visibility: visible;
+}
+.btn
+{
+ margin-bottom: 2px;
+}
+
+.item{
+    border:1px solid rgba(209, 206, 206, 0.76);
+    border-radius: 2px;
+}
