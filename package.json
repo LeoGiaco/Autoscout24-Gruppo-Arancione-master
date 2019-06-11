@@ -1,0 +1,26 @@
+{
+  "name": "autosearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/jquery": "^3.3.29",
+    "@types/pusher-js": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alian7911/autosearch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alian7911/autosearch/issues"
+  },
+  "homepage": "https://github.com/Alian7911/autosearch#readme"
+}

@@ -1,0 +1,29 @@
+<?php
+  // ini_set('max_execution_time', 600);
+  set_time_limit(0);
+  require __DIR__ . '/vendor/autoload.php';
+
+  $options = array(
+    'cluster' => 'eu',
+    'useTLS' => true
+  );
+  $pusher = new Pusher\Pusher(
+    '89a1ab5a5a1f5147f945',
+    'c0568f07ca8035bfc411',
+    '791130',
+    $options
+  );
+
+  $oldData = file_get_contents('./data.json');
+  // $pusher->trigger('my-channel', 'my-event', $oldData);
+  // for($i = 0;$i < 10; $i++){
+  while(true) {
+    $newData = file_get_contents('./data.json');
+
+    if(strcmp($newData, $oldData) != 0) {
+      $pusher->trigger('my-channel', 'my-event', json_decode($newData, true));
+      $oldData = $newData;
+    }
+    sleep(1);
+  }
+?>

@@ -1,0 +1,44 @@
+.form-card{
+    border-bottom: 2px solid dodgerblue;
+    border-right: 2px solid dodgerblue;
+    /*margin: 1rem;*/
+    margin-top: 1rem;
+    padding: 1em;
+    box-shadow: 4px 4px 16px -4px #333;
+    border-radius: 1ex;
+}
+
+.scrollable{
+    max-height: 670px;
+    overflow-y: auto;
+    margin: 1rem;
+    /*box-shadow: 0px 0px 10px -4px #333;
+    border: 2px solid orangered;*/
+}
+
+.list-item {
+    border-left: 2px solid dodgerblue;
+    border-right: 2px solid dodgerblue;
+    box-shadow: 0px -2px 10px -4px #333, 0px 2px 10px -4px #333;
+    border-radius: 1ex;
+    margin: 1rem;
+    padding: 1em;
+}
+
+.list-item .li-cara h4 {
+    border-bottom: 2px solid dodgerblue;
+    padding: 2px;
+}
+
+.list-item h2.li-prezzo {
+    background-color: orangered;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+    .btn.ml-left {
+        margin-left: 0px !important;
+    }
+}

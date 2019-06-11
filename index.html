@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <title>AUTOSEARCH</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- <script src="https://js.pusher.com/4.4/pusher.min.js"></script> -->
+    <script src="js/car.js"></script>
+    <!--<script src="js/backend.js"></script>
+    <script src="js/loadCar.js"></script>-->
+    <script src="js/main.js"></script>
+</head>
+
+<body class="h-100">
+    <header>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#sectionHome" role="tab"
+                    aria-controls="home" aria-selected="true">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#sectionVendi" role="tab"
+                    aria-controls="profile" aria-selected="false">Vendi</a>
+            </li>
+        </ul>
+    </header>
+    <div class="tab-content">
+        <section class="tab-pane fade show active" id="sectionHome" role="tabpanel" aria-labelledby="home-tab">
+            <!--sua parte-->
+            <div class="container-fluid">
+                <!-- Row Contenitore -->
+                <div class="row">
+                    <!-- Prima colonna per l'inserimento dei dati di ricerca(form) -->
+                    <div class="col-sm-4">
+                        <form class="form-card">
+                            <!-- Input marca -->
+                            <div class="form-group form-row justify-content-between">
+                                <div class="col-md-4">
+                                    <label for="feMarca">Marca:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control selezione" id="feMarca"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-row justify-content-between">
+                                <div class="col-md-4">
+                                    <label for="feModello">Modello:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control selezione" id="feModello"></select>
+                                </div>
+                            </div>
+                            <!-- Input Anno -->
+                            <div class="form-group form-row justify-content-between">
+                                <div class="col-md-4">
+                                    <label for="feAnno">Anno da:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control selezione" id="feAnno"></select>
+                                </div>
+                            </div>
+                            <!-- Input Prezzo -->
+                            <div class="form-group form-row justify-content-between">
+                                <div class="col-md-4">
+                                    <label for="fePrezzo">Prezzo fino a:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control selezione" id="fePrezzo"></select>
+                                </div>
+                            </div>
+
+                            <!-- Bottone -->
+                            <div class="form-group form-row justify-content-between">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="button" class="btn btn-primary btn-block" id="feButton">10000
+                                        risultati</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- Seconda colonna per i risultati -->
+                    <div class="col-sm-8 ">
+                        <!-- Lista che contiene i rusultati -->
+                        <li id="listTemplate" class="list-item" hidden>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="img/bg.jpg" class="img-thumbnail rounded" alt="img">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-auto">
+                                            <h1 class="li-marca">MARCA</h1>
+                                        </div>
+                                        <div class="col-md-auto">
+                                            <h2 class="li-modello">Modello</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="row container-fluid">
+                                <h2 class="li-prezzo">€500</h2>
+                            </div>
+                            <div class="row li-cara">
+                                <div class="col-md-4">
+                                    <h4 class="li-condizione">
+                                        Usato
+                                    </h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="li-emissioni">
+                                        Euro 0
+                                    </h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="li-alimentazione">
+                                        Benzina
+                                    </h4>
+                                </div>
+                            </div>
+                        </li>
+                        <ul class="list-unstyled scrollable" id="listItems">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="tab-pane fade" id="sectionVendi" role="tabpanel" aria-labelledby="profile-tab">
+
+            <div class="container-fluid column">
+                <div class="row">
+                    <div class="col-md-4 column">
+                        <!-- STATO -->
+                        <form class="form-card">
+                            <legend>Stato</legend>
+                            <!--prezzo-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="prezzo">Prezzo:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" class="form-control" id="beprezzo" step="50" min="50"
+                                        value="50">
+                                </div>
+                            </div>
+                            <!--condizione-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="condizione">Condizione:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select id="becondizione" class="form-control">
+                                        <option selected>Usato</option>
+                                        <option>Nuovo</option>
+                                        <option>Km 0</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--proprietari-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="proprietari">Proprietari:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" id="beproprietari" class="form-control" min="1" value="1">
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Motore e trazione -->
+                        <form class="form-card">
+                            <legend>Motore&Trazione</legend>
+                            <!--cambio-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="cambio">Cambio:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select class="form-control" id="becambio">
+                                        <option selected>Manuale</option>
+                                        <option>Automatico</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--marce-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="marce">Marce:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input id="bemarce" type="number" class="form-control" min="4" max="8" value="4">
+                                </div>
+                            </div>
+                            <!--cilindrata-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="cilindrata">Cilindrata:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" id="becilindrata" class="form-control" min="800" max="5000"
+                                        step="100" value="800">
+                                </div>
+                            </div>
+                            <!--cilindri-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="cilindri">Cilindri:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" id="becilindri" class="form-control" min="2" max="20" step="2"
+                                        value="2">
+                                </div>
+                            </div>
+                            <!--peso-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="peso">Peso:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" id="bepeso" class="form-control" min="800" max="5000"
+                                        step="100" value="800">
+                                </div>
+                            </div>
+                            <!--trazione-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="trazione">Trazione:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select class="form-control" id="betrazione">
+                                        <option selected>2x4</option>
+                                        <option>4x4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--cavalli-->
+                            <!--<div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="cavalli">Cavalli:</label>
+                                    <div class="offset-sm-1 col-sm-8">
+                                        <input type="number" id="becavalli" class="form-control" min="15" max="5000"
+                                            step="100">
+                                    </div>
+                                </div>-->
+                            <!--rapporto Peso/potenza-->
+                            <!--<div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="rapporto">Rapporto:</label>
+                                    <div class="offset-sm-1 col-sm-8">
+                                        <input type="number" id="berapporto" class="form-control" min="15" max="5000"
+                                            step="100">
+                                    </div>
+                                </div>-->
+                        </form>
+                    </div>
+                    <div class="col-md-4 column">
+                        <!-- Caratteristiche -->
+                        <form class="form-card">
+                            <legend>Caratteristiche</legend>
+                            <!--Marca-->
+                            <div class=" form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="marca">Marca:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select id="bemarca" class="form-control">
+                                        <option selected>Audi</option>
+                                        <option>Alfa </option>
+                                        <option>Abarth</option>
+                                        <option>Bentley</option>
+                                        <option>Bugatti</option>
+                                        <option>BMW</option>
+                                        <option>Citroen</option>
+                                        <option>Dacia</option>
+                                        <option>Ford</option>
+                                        <option>Fiat</option>
+                                        <option>Tesla</option>
+                                        <option>Hyundai</option>
+                                        <option>Lexus</option>
+                                        <option>Mercedes-benz</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--modello-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="modello">Modello:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select id="bemodelloAudi" class="form-control selModel">
+                                        <option selected>A1</option>
+                                        <option>A2</option>
+                                        <option>A3</option>
+                                        <option>A4</option>
+                                        <option>A5</option>
+                                        <option>A6</option>
+                                        <option>Q1</option>
+                                        <option>Q2</option>
+                                        <option>Q3</option>
+                                        <option>Q4</option>
+                                        <option>Q5</option>
+                                        <option>Q6</option>
+                                    </select>
+                                    <select hidden id="bemodelloAlfa" class="form-control selModel">
+                                        <option selected>Giulietta</option>
+                                        <option>Giulia</option>
+                                        <option>Mito</option>
+                                        <option>Stelvio</option>
+                                        <option>Brera</option>
+                                    </select>
+                                    <select hidden id="bemodelloAbarth" class="form-control selModel">
+                                        <option selected>595</option>
+                                        <option>595C</option>
+                                        <option>695</option>
+                                        <option>695C</option>
+                                        <option>124 Spider</option>
+                                        <option>Punto</option>
+                                    </select>
+                                    <select hidden id="bemodelloBentley" class="form-control selModel">
+                                        <option selected>Continental GT</option>
+                                        <option>Mulsanne</option>
+                                        <option>Bentayga</option>
+                                    </select>
+                                    <select hidden id="bemodelloBugatti" class="form-control selModel">
+                                        <option selected>Divo</option>
+                                        <option>Chiron</option>
+                                        <option>Galibier</option>
+                                        <option>Veyron</option>
+
+                                    </select>
+                                    <select hidden id="bemodelloBMW" class="form-control selModel">
+                                        <option selected>Serie 1</option>
+                                        <option>Serie 3</option>
+                                        <option>Serie 5</option>
+                                        <option>X6</option>
+                                        <option>X3</option>
+                                        <option>I8</option>
+                                    </select>
+                                    <select hidden id="bemodelloCitroen" class="form-control selModel">
+                                        <option selected>C3</option>
+                                        <option>C4</option>
+                                        <option>C5</option>
+                                        <option>Berlingo</option>
+                                        <option>DS 3</option>
+                                        <option>DS 4</option>
+                                        <option>DS 5</option>
+                                    </select>
+                                    <select hidden id="bemodelloDacia" class="form-control selModel">
+                                        <option selected>Duster</option>
+                                        <option>Sandero</option>
+                                        <option>Dokker</option>
+                                        <option>Lodgy</option>
+                                    </select>
+                                    <select hidden id="bemodelloFord" class="form-control selModel">
+                                        <option selected>Mustang</option>
+                                        <option>Fiesta</option>
+                                        <option>Focus</option>
+                                        <option>Fiesta ST</option>
+                                        <option>Focus ST</option>
+                                        <option>Fiesta RS</option>
+                                        <option>Focus RS</option>
+                                        <option>Kunga</option>
+                                    </select>
+                                    <select hidden id="bemodelloFiat" class="form-control selModel">
+                                        <option selected>500</option>
+                                        <option>500X</option>
+                                        <option>500xL</option>
+                                        <option>Tipo</option>
+                                        <option>Panda</option>
+                                        <option>Qubo</option>
+                                    </select>
+                                    <select hidden id="bemodelloTesla" class="form-control selModel">
+                                        <option selected>Model X</option>
+                                        <option>Model 3</option>
+                                        <option>Model S</option>
+                                    </select>
+                                    <select hidden id="bemodelloHyundai" class="form-control selModel">
+                                        <option selected>Tucson</option>
+                                        <option>Santa fe</option>
+                                        <option>Kona</option>
+                                        <option>I30</option>
+                                        <option>I20</option>
+                                        <option>I10</option>
+                                    </select>
+                                    <select hidden id="bemodelloLexus" class="form-control selModel">
+                                        <option selected>IS</option>
+                                        <option>RX</option>
+                                        <option>LS</option>
+                                        <option>NX</option>
+                                        <option>UX</option>
+                                        <option>RC</option>
+                                    </select>
+                                    <select hidden id="bemodelloMercedes-benz" class="form-control selModel">
+                                        <option selected>Classe A</option>
+                                        <option>Classe B</option>
+                                        <option>Classe C</option>
+                                        <option>Classe D</option>
+                                        <option>Classe E</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <!--anno-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="anno">Anno:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="date" id="beanno" class="form-control">
+                                </div>
+                            </div>
+                            <!--colore-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="colore">Colore:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="color" id="becolore" class="form-control" value="#2a2a2a">
+                                </div>
+                            </div>
+                            <!--tipoVernice-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="tipoVernice">Tipo vernice:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select id="betipoVernice" class="form-control">
+                                        <option selected>Metallizzato</option>
+                                        <option>Opaco</option>
+                                        <option>Classico</option>
+                                        <option>Perlescente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--rivestimento-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="rivestimento">Rivestimento:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select id="berivestimento" class="form-control">
+                                        <option selected>Cuoio</option>
+                                        <option>Pelle artificiale</option>
+                                        <option>Fibra di carbonio</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Carrozzeria-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="carrozzeria">Carrozzeria:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select id="becarrozzeria" class="form-control">
+                                        <option selected>Utilitaria</option>
+                                        <option>Berlina</option>
+                                        <option>Coupe</option>
+                                        <option>Monovolume</option>
+                                        <option>fuoristrada</option>
+                                        <option>Cabrio</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--porte-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="porte">Porte:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" id="beporte" class="form-control" min="3" max="5" value="3">
+                                </div>
+                            </div>
+                            <!--posti-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="posti">Posti:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <input type="number" id="beposti" class="form-control" min="4" max="7" value="4">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4 column">
+                        <!-- Ambiente -->
+                        <form class="form-card">
+                            <legend>Ambiente</legend>
+                            <!--alimentazione-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="bealimentazione">Alimentazione:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select class="form-control" id="bealimentazione">
+                                        <option selected>Benzina</option>
+                                        <option>Diesel</option>
+                                        <option>GPL</option>
+                                        <option>Metano</option>
+                                        <option>Elettrica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--classe Emissione-->
+                            <div class="form-group form-row">
+                                <label class="col-sm-3 col-form-label" for="emissioni">Emissioni:</label>
+                                <div class="offset-sm-1 col-sm-8">
+                                    <select class="form-control" id="beemissioni">
+                                        <option selected>Euro 0</option>
+                                        <option>Euro 1</option>
+                                        <option>Euro 2</option>
+                                        <option>Euro 3</option>
+                                        <option>Euro 4</option>
+                                        <option>Euro 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Foto -->
+                        <form class="form-card">
+                            <legend>Image</legend>
+                            <!--image-->
+                            <div class="form-group form-row">
+                                <div class="offset-sm-1 col-sm-10">
+                                    <input type="button" id="Image" disabled class="col-sm-12 btn btn-primary"
+                                        value="Inserisci Foto">
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Note -->
+                        <form class="form-card">
+                            <legend>Optional with note</legend>
+                            <!--text area-->
+                            <div class="form-group form-row h-100">
+                                <div class="offset-sm-1 col-sm-10 h-100">
+                                    <textarea id="betextarea" class="form-control" placeholder="Optional"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <button id="beinvia" type="button" class="col-sm-3 ml-auto btn btn-primary m-3">
+                        Immetti veicolo nel sistema
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>

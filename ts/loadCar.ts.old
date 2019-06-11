@@ -1,0 +1,133 @@
+var auto = new Array<Car>();
+var marche: string[];
+var modelli: string[];
+
+function loadjSON() {
+    $.getJSON("veicoli.json").done(function (data) {
+        $.each(data, function (key, elem) {
+            auto.push(elem);
+        })
+    })
+}
+
+function createDiv(temp: Car, n: number) {
+    $("#listItems").append(str(n));
+    $("#modello_" + n).html("Modello:" + temp.modello + " Porte:" + temp.porte + " cilindrata: " + temp.cilindrata);
+    $("#prezzo_" + n).html("Prezzo: " + temp.prezzo.toString() + " euro.");
+    $("#descrizione_" + n).html("Marca: " + temp.marca);
+}
+
+function str(n: number) {
+    return '<li class="media form-card"> <div class="col-md-3"> <img id="img_' + n + '" src="001.jpg" class="img-thumbnail rounded" alt="img"> </div> <div class="col-md-9"> <div id="modello_' + n + '"class="row">modello </div> <div class="row"> <div class="col-md-3"> <div id="prezzo_' + n + '" class="row">PREZZO</div> </div> <div class="col-md-9" id="descrizione_' + n + '">DESCRIZIONE blbalblabalblablablaablablbl</div> </div> </div> </li>';
+}
+
+function loadParameters() {
+
+    $.each(auto, function (key, el) {
+        if (marche.indexOf(el.marca) < 0) {
+            marche.push(el.marca);
+            $("#feMarca").append("<option>${el.marca}</option>");
+        }
+        if (modelli.indexOf(el.modello) < 0) {
+            modelli.push(el.modello);
+        }
+    })
+
+}
+
+function searchCar(loadCar: boolean) {
+    let elementFound = new Array<Car>();
+    let check: boolean = false;
+    let marca = $('#feMarca').find(":selected").text();
+    let modello = $('#feModello').find(":selected").text();
+    let anno = $('#feAnno').find(":selected").text();
+    let prezzo = $('#fePrezzo').find(":selected").text();
+    let carNumber: number = 0;
+
+    if (marca != "") {
+        for (let i = 0; i < auto.length; i++) {
+            if (auto[i].marca == marca) {
+                check = true;
+                elementFound.push(auto[i]);
+                carNumber++;
+            }
+        }
+    }
+
+    if (modello != "") {
+        for (let i = 0; i < auto.length; i++) {
+            if (auto[i].modello == modello) {
+                if (elementFound.indexOf(auto[i]) != -1) {
+                    check = true;
+                    elementFound.push(auto[i]);
+                    carNumber++;
+                }
+            }
+        }
+
+    }
+
+    if (anno != "") {
+        for (let i = 0; i < auto.length; i++) {
+            if (auto[i].anno == Number(anno)) {
+                if (elementFound.indexOf(auto[i]) != -1) {
+                    check = true;
+                    elementFound.push(auto[i]);
+                    carNumber++;
+                }
+            }
+        }
+    }
+
+    if (prezzo != "") {
+        for (let i = 0; i < auto.length; i++) {
+            if (auto[i].prezzo == Number(prezzo)) {
+                if (elementFound.indexOf(auto[i]) != -1) {
+                    check = true;
+                    elementFound.push(auto[i]);
+                    carNumber++;//BRUM BRUM
+                }
+            }
+        }
+    }
+
+    if (!check) {
+        carNumber = auto.length;
+        elementFound = auto;
+    }
+
+    $("#feButton").text(carNumber + " auto trovate");
+    var n: number = 0;
+    if (loadCar) {
+        $("#listItems").empty();
+        elementFound.forEach(element => {
+            createDiv(element, n);
+            n++;
+        });
+    }
+}
+
+
+
+$(document).ready(() => {
+    loadjSON();
+    loadParameters();
+    $(".selezione").change(function () {
+        searchCar(false);
+    })
+    $("#feButton").click(function () {
+        searchCar(true);
+    });
+
+    for (let index = 2019; index >= 1970; index--) {
+        $("#feAnno").append($("<option/>").text(index));
+    }
+
+    $("#fePrezzo").append($("<option/>").text("All"));
+    for (let index = 500; index <= 100000; index += 100) {
+        $("#fePrezzo").append($("<option/>").text(index));
+    }
+
+    // Bind all events
+    $("#beinvia").on('click', Backend.processClick);
+});

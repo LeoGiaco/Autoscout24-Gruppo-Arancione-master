@@ -1,0 +1,100 @@
+
+//https://www.w3schools.com/jsref/dom_obj_event.asp
+
+module Backend {
+    export var debugArr = new Array<Car>();
+    export function processClick(e: Event): void {
+        e.preventDefault();
+        let car = fetchCar();
+        console.log(car);
+        if (car == null) {
+            alert("ERRORE\nRiempi tutti i campi.");
+            e.stopPropagation();
+            return;
+        }
+        debugArr.push(car);
+        $('input[type="text"]').attr("value","");
+        $('input[type="color"]').attr("value","#000000");
+        sendJson(toJson(debugArr))
+    }
+
+    export function fetchCar(): Car | null {
+        let prezzo: number = $("#beprezzo").val() as number;
+        let conditionval: string = $("#becondizione").val() as string;
+        let condition: CarCondition = conditionval == "Usato" ? CarCondition.Usato : conditionval == "Nuovo" ? CarCondition.Nuovo : CarCondition.KM0;
+        let proprietari: number = Number($("#beproprietari").val());
+
+        //Motore e trazione
+        let cambioval: string = $("#becambio").val() as string;
+        let cambio: CarTrasmission = cambioval == "Manuale" ? CarTrasmission.Manuale : CarTrasmission.Automatico;
+        let marce: number = Number($("#bemarce").val());
+        let cilindrata: number = Number($("#becilindrata").val());
+        let cilindri: number = Number($("#becilindri").val());
+        let peso: number = Number($("#bepeso").val());
+        let trazione: string = $("#betrazione").val() as string;
+
+        //Caratteristiche
+        let marca: string = $("#bemarca").val() as string;
+        let modello: string = $("#bemodello" + marca).val() as string;
+        let anno: number = (new Date($("#beanno").val() as string)).getFullYear();
+        let colore: string = $("#becolore").val() as string;
+        let tipoVernice: string = $("#betipoVernice").val() as string;
+        let rivestimenti: string = $("#berivestimento").val() as string;
+        let carrozzeria: string = $("#becarrozzeria").val() as string;
+        let porte: number = $("#beporte").val() as number;
+        let posti: number = $("#beposti").val() as number;
+
+        //Ambiente
+        let alimentazioneval: string = $("#bealimentazione").val() as string;
+        let alimentazione: CarAlimentation = alimentazioneval == "Benzina" ? CarAlimentation.Benzina :
+            alimentazioneval == "Diesel" ? CarAlimentation.Diesel :
+                alimentazioneval == "GPL" ? CarAlimentation.GPL :
+                    alimentazioneval == "Metano" ? CarAlimentation.Metano : CarAlimentation.Elettrica;
+        let classeEmissionival: string = $("#beemissioni").val() as string;
+        let classeEmissioni: EmissionClass = classeEmissionival == "Euro 0" ? EmissionClass.Euro0 :
+            classeEmissionival == "Euro 1" ? EmissionClass.Euro1 :
+                classeEmissionival == "Euro 2" ? EmissionClass.Euro2 :
+                    classeEmissionival == "Euro 3" ? EmissionClass.Euro3 :
+                        classeEmissionival == "Euro 4" ? EmissionClass.Euro4 : EmissionClass.Euro5;
+        let optional:string =$("#betextarea").val() as string;
+        return new Car(
+            prezzo,
+            condition,
+            proprietari,
+            cambio,
+            marce,
+            cilindrata,
+            cilindri,
+            peso,
+            trazione,
+            marca,
+            modello,
+            anno,
+            colore,
+            tipoVernice,
+            rivestimenti,
+            carrozzeria,
+            porte,
+            posti,
+            alimentazione,
+            classeEmissioni,
+            optional
+        );
+    }
+
+    export function toJson(array: any): string {
+        return JSON.stringify(array);
+    }
+
+    export function sendJson(jsonString: string): void {
+        //send to pusher the array string
+    }
+}
+
+module BEUI {
+    export function loadModelSelection() {
+        let marcaSel = $("#bemarca").val() as string;
+        $(".selModel").attr("hidden", "hidden");
+        $("#bemodello" + marcaSel).removeAttr("hidden");
+    }
+}

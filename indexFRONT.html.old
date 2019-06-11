@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/loadCar.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/stili.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Nav -->
+      <div class="row-sm"  style="margin:5px;" >
+          <ul class="nav nav-tabs" id="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">AutoScout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Vendi</a>
+            </li>
+          </ul>
+        </div>
+
+      <!--Container di tutto il resto-->
+      <div class="container-fullwidth" style="margin: 2px; height: auto;">
+        <!-- Row Contenitore -->
+        <div class="row" style="background-color: rgba(85, 205, 221, 0.1);">
+          <!-- Prima colonna per l'inserimento dei dati di ricerca(form) -->
+          <div class="col-sm-4" style="padding: 1.5%; padding-right: 2%; padding-top:1%;">
+            <form >
+              <!-- Input marca -->
+              <div class="form-group form-row justify-content-between">
+                  <div class="col-sm-4">
+                    <label for="feMarca">Marca:</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select class="form-control" id="feMarca"></select>
+                  </div>
+              </div>
+
+              <div class="form-group form-row justify-content-between">
+                <div class="col-sm-4">
+                  <label for="feModello">Modello:</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" id="feModello"></select>
+                </div>
+              </div>
+              <!-- Input Anno -->
+              <div class="form-group form-row justify-content-between">
+                <div class="col-sm-4">
+                  <label for="feAnno">Anno da:</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" id="feAnno"></select>
+                </div>
+              </div>
+              <!-- Input Prezzo -->
+              <div class="form-group form-row justify-content-between">
+                <div class="col-sm-4">
+                  <label for="fePrezzo">Prezzo fino a:</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" id="fePrezzo"></select>
+                </div>
+              </div>
+              <!-- Input Paese -->
+              <div class="form-group form-row justify-content-between">
+                <div class="col-sm-4">
+                  <label for="fePaese">Paese:</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" id="fePaese"></select>
+                </div>
+              </div>
+              <!-- Input CAP -->
+              <div class="form-group form-row justify-content-between">
+                <div class="col-sm-4">
+                    <label for="feCAP">CAP:</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="feCAP" placeholder="Inserisci CAP">
+                </div>
+              </div>
+              <!-- Bottone -->
+              <div class="form-group form-row justify-content-between">
+                <div class="col-sm-8 offset-sm-4">
+                    <button type="submit" class="btn btn-primary btn-block" id="feButton">10000 risultati</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <!-- Seconda colonna per i risultati -->
+          <div class="col-sm-8 scrollable" style="overflow: auto">
+            <!-- Lista che contiene i rusultati -->
+              <ul class="list-unstyled">
+
+                <div class="row">
+                  <!-- Non ho voglia di commentare ti spremi le meningi e provi a capirci qualcosa -->
+                  <li class="media" style="margin-top: 5px;">
+                      <div class="col-sm-3">
+                          <img src="img/001.jpg" class="img-thumbnail rounded float-left" alt="img1">
+                      </div>
+                      <div class="col-sm-9">
+                        <div class="row">
+                          TITOLO
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <div class="row">PREZZO</div>
+                            <div class="row">PAESE</div>
+                          </div>
+                          <div class="col-sm-9">DESCRIZIONE blbalblabalblablablaablablbl</div>
+                        </div>
+                      </div>
+                  </li>
+
+                  <li class="media" style="margin-top: 5px;">
+                      <div class="col-sm-3">
+                          <img src="img/001.jpg" class="img-thumbnail rounded float-left" alt="img1">
+                      </div>
+                      <div class="col-sm-9">
+                        <div class="row">
+                          TITOLO
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <div class="row">PREZZO</div>
+                            <div class="row">PAESE</div>
+                          </div>
+                          <div class="col-sm-9">DESCRIZIONE blbalblabalblablablaablablbl</div>
+                        </div>
+                      </div>
+                  </li>
+
+                  <li class="media" style="margin-top: 5px;">
+                      <div class="col-sm-3">
+                          <img src="img/001.jpg" class="img-thumbnail rounded float-left" alt="img1">
+                      </div>
+                      <div class="col-sm-9">
+                        <div class="row">
+                          TITOLO
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <div class="row">PREZZO</div>
+                            <div class="row">PAESE</div>
+                          </div>
+                          <div class="col-sm-9">DESCRIZIONE blbalblabalblablablaablablbl</div>
+                        </div>
+                      </div>
+                  </li>
+
+                  <li class="media" style="margin-top: 5px;">
+                      <div class="col-sm-3">
+                          <img src="img/001.jpg" class="img-thumbnail rounded float-left" alt="img1">
+                      </div>
+                      <div class="col-sm-9">
+                        <div class="row">
+                          TITOLO
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <div class="row">PREZZO</div>
+                            <div class="row">PAESE</div>
+                          </div>
+                          <div class="col-sm-9">DESCRIZIONE blbalblabalblablablaablablbl</div>
+                        </div>
+                      </div>
+                  </li>
+
+                </div>
+              </ul>
+          </div>
+        </div>
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  </body>
+</html>
