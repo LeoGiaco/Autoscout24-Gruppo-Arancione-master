@@ -1,5 +1,5 @@
 $(()=>{
-    $("button").click(function(e){
+    $(".tblbutton").click(function(e){
         $('.display').remove();
         var formData = new FormData();
         formData.append('num',$(e.target).val());
@@ -10,7 +10,8 @@ $(()=>{
             processData: false,
             contentType: false
         }).done(function(html){
-            $("body").append(html.slice(0,html.indexOf('<!')));
+            $("ul").empty();
+            $("ul").append(html.slice(0,html.indexOf('<!')));
         });
     });
 })

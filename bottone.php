@@ -72,26 +72,16 @@
 
         foreach($rows as $row)
         {
-            echo "<p class='display'>".$row[$column]."</p>";
+            // echo "<p class='display'>.$row[$column].</p>";
+            echo "<li class='item row'><div class='col-sm-8'>".$row[$column]."</div>
+            <button type='button' class='btnvisibilita btn btn-outline-primary modifica col-sm-2' data-toggle='modal'
+              data-target='#Modalmodifica'><i class='fas fa-cogs'></i></button>
+            <button type='button 'class='btnvisibilita btn btn-outline-primary delete col-sm-2 'data-toggle='modal'
+              data-target='#ModlaDelete'><i class='far fa-trash-alt'></i></button>
+          </li>";
         }
     }
 
 ?>
 
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="">
-        <script src="temp.js"></script>
-    </head>
-    <body>
-        <button value="0">Ciao</button>        
-    </body>
-</html>
 
