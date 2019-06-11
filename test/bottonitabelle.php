@@ -22,9 +22,11 @@
 
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $val = 0;
         foreach($rows as $row)
         {
-            echo "<button id=" . $row['table_name'] . ">" . $row['table_name'] . "</button><br />";
+            echo "<button value = '$val' id=" . $row['table_name'] . ">" . $row['table_name'] . "</button><br />";
+            $val++;
         }
     }
 
@@ -40,6 +42,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="">
+        <script src="temp.js"></script>
     </head>
     <body>
         <?php displayButtons(); ?>

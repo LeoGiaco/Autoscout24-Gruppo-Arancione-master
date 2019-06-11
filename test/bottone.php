@@ -23,6 +23,19 @@
         die("Errore: " . $e->getMessage());  // Termina lo script.
     }
 
+    $tables = array();
+
+    $sql = "SELECT table_name, column_name FROM information_schema.columns WHERE table_type = 'base table'";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach($rows as $row)
+    {
+        array_push($tables, new Pair($row['table_name']);
+    }
+
     $tables = [
         new Pair("tblCambio", "TipoDiCambio"),
         new Pair("tblCarburanti", "Carburante"),
