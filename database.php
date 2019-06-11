@@ -12,11 +12,24 @@
         die("Errore: " . $e->getMessage());  // Termina lo script.
     }
 
-    $type = $_POST['btn'];
+    $tables = ["tblCambio","tblCarburanti","tblCarrozzerie","tblClasseEmissioni",
+                "tblColori","tblInterni","tblOptional","tblRegioni","tblStato",
+                "tblTipoProprietario","tblTrazione","tblVernici"];
 
-    switch($type)
+    $type = $tables[$_POST['num']];
+
+    $sql = "SELECT * FROM :tabella WHERE AnnoNascita > :anno";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':tabella', $type, PDO::PARAM_STR);
+    $stmt->bindValue(':anno', 0, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    usort($rows, "cmp");
+
+    foreach($rows as $row)
     {
-        
+        echo $row['Nome'] . ' - ' . $row['Cognome'] . ' - ' . $row['AnnoNascita'] . '<br />';
     }
 
 

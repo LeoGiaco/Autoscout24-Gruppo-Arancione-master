@@ -1,6 +1,6 @@
 var formData = new FormData();
 //JSON obj
-formData.append('btn',valore);
+formData.append('num',valore);
 formData.append('objArr', JSON.stringify(macchine, null, 4));
 console.log(formData);
 $.ajax({
