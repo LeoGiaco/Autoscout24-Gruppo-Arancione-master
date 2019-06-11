@@ -2,7 +2,7 @@
     try     
     {
         $dbHostname = "192.168.245.8\\SQLEXPRESS2017";
-        $dbName = "AlitaliaCicognani";
+        $dbName = "AutoScout24GruppoArancione";
         $dbLogin = "sa";
         $dbPassword = "vittorio";
         
