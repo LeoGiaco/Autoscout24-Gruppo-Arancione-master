@@ -12,7 +12,12 @@
         die("Errore: " . $e->getMessage());  // Termina lo script.
     }
 
-    
+    $type = $_POST['btn'];
+
+    switch($type)
+    {
+        
+    }
 
 
 ?>
