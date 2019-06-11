@@ -56,12 +56,16 @@
                 case "delete":
 
                     break;
+                case "getall":
+                    getTable($tables[$_POST['num']]->table);
+                    break;
                 case "create":
-
                     break;
             }
         }
-        display();
+        // Check con isset per errore null.
+        if($_POST['action'] != "getall")
+            display();
     }
 
     function display()
@@ -135,9 +139,33 @@
         return -1;
     }
 
-    function create()
+    function create($tbl)
     {
-        
+        $sql = "INSERT INTO $tbl (colonna) VALUES (valori)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+    }
+
+    function getTable($name)
+    {
+        global $db;
+
+        $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
+                where TABLE_NAME = '$name'"; // Seleziona i nomi delle tabelle e delle colonne.
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $index = 0;
+        foreach($rows as $row)
+        {
+            echo "<div class='modal-body row'>
+            <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+            <input type='text' class='form-control offset-sm-1 col-sm-8'
+              placeholder='ao'>
+            </div>";
+        }
     }
 ?>
 

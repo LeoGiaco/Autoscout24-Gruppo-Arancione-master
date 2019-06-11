@@ -18,6 +18,22 @@ $(()=>{
         });
     });
 
+    $(".btnnuovo").click(function(e){
+        var formData = new FormData();
+        formData.append('num',tabella);
+        formData.append('action',"getall");
+        $.ajax({
+            url: "bottone.php",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function(html){
+            $("#create .modal-body").remove();
+            $("#create .modal-content").append(html.slice(0,html.indexOf('<!')));
+        });
+    });
+
     $(".modify").click(function(e){
         var formData = new FormData();
         formData.append('num',tabella);
@@ -38,6 +54,7 @@ $(()=>{
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"create");
+        formData.append('tblname',$(e.target).html());
         $.ajax({
             url: "bottone.php",
             type: "POST",

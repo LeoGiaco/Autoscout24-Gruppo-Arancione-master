@@ -64,7 +64,7 @@
         <div class="ex2">
         </div>
         <div class="row">
-        <button type="button"  class="btn offset-sm-5 col-sm-2 btn-outline-primary btnnuovo " data-toggle="modal"
+        <button type="button" class="btn offset-sm-5 col-sm-2 btn-outline-primary btnnuovo " data-toggle="modal"
             data-target="#create">Nuovo</button>
         </div>
       </div>
@@ -80,11 +80,11 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body row">
+          <!-- <div class="modal-body row">
             <label for="exampleFormControlInput1" class="col-sm-3 ">Valore:</label>
             <input type="text" class="form-control offset-sm-1 col-sm-8"
               placeholder="trovare il modo per inserire il valore di prima">
-          </div>
+          </div> -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button class="modify" type="button" class="btn btn-primary">Save changes</button>
