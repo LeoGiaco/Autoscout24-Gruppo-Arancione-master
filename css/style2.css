@@ -3,12 +3,10 @@
 }
 .btnvisibilita
 {
-    visibility: hidden;
-}
-
-.item:hover .btnvisibilita{
     visibility: visible;
 }
+
+
 .btn
 {
     margin: 0px;
