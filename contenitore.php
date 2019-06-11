@@ -117,7 +117,7 @@
       </div>
     </div>
     <!-- Modal modifica -->
-    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -134,13 +134,13 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button id="modify" type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
     </div>
     <!-- Modal delete -->
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -152,13 +152,13 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">NO,Close</button>
-            <button type="button" class="btn btn-primary">YES</button>
+            <button id="delete" type="button" class="btn btn-primary">YES</button>
           </div>
         </div>
       </div>
     </div>
     <!-- Modal crea -->
-    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -174,7 +174,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button id="create" type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
