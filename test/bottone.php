@@ -25,7 +25,9 @@
 
     $tables = array();
 
-    $sql = "SELECT table_name, column_name FROM information_schema.columns WHERE table_type = 'base table'";
+    $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+                where SUBSTRING(TABLE_NAME,0,2) = 't' and 
+                OBJECTPROPERTY(OBJECT_ID(constraint_schema+'.'+QUOTENAME(CONSTRAINT_NAME)),'IsPrimaryKey')=1";
     $stmt = $db->prepare($sql);
     $stmt->execute();
 
@@ -33,23 +35,23 @@
 
     foreach($rows as $row)
     {
-        array_push($tables, new Pair($row['table_name']);
+        array_push($tables, new Pair($row['TABLE_NAME'], $row['COLUMN_NAME']));
     }
 
-    $tables = [
-        new Pair("tblCambio", "TipoDiCambio"),
-        new Pair("tblCarburanti", "Carburante"),
-        new Pair("tblCarrozzerie", "TipoCarrozzeria"),
-        new Pair("tblClasseEmissioni", "Classe"),
-        new Pair("tblColori", "Colore"),
-        new Pair("tblInterni", "Interni"),
-        new Pair("tblOptional", "NomeOptional"),
-        new Pair("tblRegioni", "Regione"),
-        new Pair("tblStato", "Stato"),
-        new Pair("tblTipoProprietario", "TipoProprietario"),
-        new Pair("tblTrazione", "TipoDiTrazione"),
-        new Pair("tblVernici", "Vernice")
-    ];
+    // $tables = [
+    //     new Pair("tblCambio", "TipoDiCambio"),
+    //     new Pair("tblCarburanti", "Carburante"),
+    //     new Pair("tblCarrozzerie", "TipoCarrozzeria"),
+    //     new Pair("tblClasseEmissioni", "Classe"),
+    //     new Pair("tblColori", "Colore"),
+    //     new Pair("tblInterni", "Interni"),
+    //     new Pair("tblOptional", "NomeOptional"),
+    //     new Pair("tblRegioni", "Regione"),
+    //     new Pair("tblStato", "Stato"),
+    //     new Pair("tblTipoProprietario", "TipoProprietario"),
+    //     new Pair("tblTrazione", "TipoDiTrazione"),
+    //     new Pair("tblVernici", "Vernice")
+    // ];
 
     if(isset($_POST['num']))
         display();

@@ -16,7 +16,7 @@
     {
         global $db;
 
-        $sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table'";
+        $sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' ORDER BY table_name";
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
