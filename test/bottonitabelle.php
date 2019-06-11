@@ -1,15 +1,4 @@
 <?php
-    class Pair
-    {
-        public $table;
-        public $column;
-        function __construct($tb,$col)
-        {
-            $this->table = $tb;
-            $this->column = $col;
-        }
-    }
-
     try     
     {
         $dbHostname = "192.168.245.8\\SQLEXPRESS2017";
@@ -23,33 +12,11 @@
         die("Errore: " . $e->getMessage());  // Termina lo script.
     }
 
-    $tables = [
-        new Pair("tblCambio", "TipoDiCambio"),
-        new Pair("tblCarburanti", "Carburante"),
-        new Pair("tblCarrozzerie", "TipoCarrozzeria"),
-        new Pair("tblClasseEmissioni", "Classe"),
-        new Pair("tblColori", "Colore"),
-        new Pair("tblInterni", "Interni"),
-        new Pair("tblOptional", "NomeOptional"),
-        new Pair("tblRegioni", "Regione"),
-        new Pair("tblStato", "Stato"),
-        new Pair("tblTipoProprietario", "TipoProprietario"),
-        new Pair("tblTrazione", "TipoDiTrazione"),
-        new Pair("tblVernici", "Vernice")
-    ];
-
-    if(isset($_POST['num']))
-        display();
-
-    function display()
+    function displayButtons()
     {
-        global $tables;
         global $db;
 
-        $table = $tables[$_POST['num']]->table;
-        $column = $tables[$_POST['num']]->column;
-
-        $sql = "SELECT * FROM $table";
+        $sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
@@ -57,7 +24,7 @@
 
         foreach($rows as $row)
         {
-            echo "<p class='display'>".$row[$column]."</p>";
+            echo "<button id=" . $row['table_name'] . ">" . $row['table_name'] . "</button><br />";
         }
     }
 
@@ -73,10 +40,9 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="">
-        <script src="temp.js"></script>
     </head>
     <body>
-        <button>Ciao</button>        
+        <?php displayButtons(); ?>
     </body>
 </html>
 

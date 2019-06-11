@@ -1,5 +1,6 @@
 $(()=>{
-    $("button").click(function(){
+    $("button").click(function(e){
+        $('.display').remove();
         var formData = new FormData();
         formData.append('num',0);
         $.ajax({
@@ -8,6 +9,8 @@ $(()=>{
             data: formData,
             processData: false,
             contentType: false
+        }).done(function(html){
+            $("body").append(html.slice(0,html.indexOf('<!')));
         });
     });
 })
