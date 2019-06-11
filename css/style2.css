@@ -4,10 +4,6 @@
 
 .btnvisibilita
 {
-    visibility: hidden;
-}
-
-.item:hover .btnvisibilita{
     visibility: visible;
 }
 

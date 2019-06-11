@@ -58,13 +58,57 @@
     <div class=" offset-sm-1 list-group col-sm-3 column ex1 prova">
       <?php displayButtons(); ?>
     </div>
-
-
     <!-- contenitore -->
     <div class="container col-sm-8 row">
       <div class="column offset-sm-1 col-sm-10 prova">
-        <div class="ex2"><ul>
-        </ul>
+        <div class="ex2">
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Firstdwdw</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+      <th scope="col">edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td><button type='button' class='btnvisibilita btn btn-outline-primary modifica ' data-toggle='modal'
+              data-target='#Modalmodifica'><i class='fas fa-cogs'></i></button>
+            <button type='button 'class='btnvisibilita btn btn-outline-primary delete 'data-toggle='modal'
+              data-target='#ModlaDelete'><i class='far fa-trash-alt'></i></button></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
         </div>
         <div class="row">
         <button type="button"  class="btn offset-sm-5 col-sm-2 btn-outline-primary btnnuovo " data-toggle="modal"
@@ -73,7 +117,7 @@
       </div>
     </div>
     <!-- Modal modifica -->
-    <div class="modal fade" id="Modalmodifica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -96,7 +140,7 @@
       </div>
     </div>
     <!-- Modal delete -->
-    <div class="modal fade" id="ModlaDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -114,7 +158,7 @@
       </div>
     </div>
     <!-- Modal crea -->
-    <div class="modal fade" id="Modalnew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -138,7 +182,7 @@
   </div>
 
 
-
+ 
 
 
 
