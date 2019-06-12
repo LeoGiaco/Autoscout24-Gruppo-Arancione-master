@@ -54,7 +54,7 @@
                     getTable($tables[$_POST['num']]->table, $_POST['row-index']);
                     break;
                 case "modify":
-                    getTable($tables[$_POST['num']]->table);
+                    modify($tables[$_POST['num']]->table, $_POST['row-index']);
                     display();
                     break;
                 case "delete":
@@ -131,6 +131,15 @@
     function create($tbl)
     {
         $sql = "INSERT INTO $tbl (colonna) VALUES (valori)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+    }
+
+    function modify($tbl, $rowindex)
+    {
+        global $db;
+
+        $sql = "EXECUTE sp".substr($tbl,3)."Update SET ".$_POST['values']." WHERE ".getPrimaryKey($tbl)."='".getPrimaryKeyValues($tbl)[$rowindex][getPrimaryKey($tbl)]."'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
     }
