@@ -32,15 +32,16 @@ $(()=>{
             processData: false,
             contentType: false
         }).done(function(html){
-            $("#create .modal-body").remove();
-            $("#create .modal-content").append(html.slice(0,html.indexOf('<!')));
+            $("#create .modal-body").empty();
+            $("#create .modal-body").append(html.slice(0,html.indexOf('<!')));
         });
     });
 
-    $(document).on('click','.modify',function(e){
+    $(document).on('click','.modify-show',function(e){
         var formData = new FormData();
         formData.append('num',tabella);
-        formData.append('action',"modify");
+        formData.append('action','modify-show');
+        formData.append('row-index',getChildIndex(e.target.parentNode.parentNode))
 
         $.ajax({
             url: "bottone.php",
@@ -49,16 +50,17 @@ $(()=>{
             processData: false,
             contentType: false
         }).done(function(html){
-            $("#modify .modal-body").remove();
-            $("#modify .modal-content").append(html.slice(0,html.indexOf('<!')));
+            $("#modify .modal-body").empty();
+            $("#modify .modal-body").append(html.slice(0,html.indexOf('<!')));
         });
     });
         
-    $(".create").click(function(e){
+    $(".create-show").click(function(e){
         var formData = new FormData();
         formData.append('num',tabella);
-        formData.append('action',"create");
+        formData.append('action',"create-show");
         formData.append('tblname',$(e.target).html());
+        formData.append('row',);
 
         $.ajax({
             url: "bottone.php",
@@ -88,4 +90,15 @@ $(()=>{
             $(".ex2").append(html.slice(0,html.indexOf('<!')));
         });
     });
+
+    function getChildIndex(child){
+        var parent = child.parentNode;
+        var children = parent.children;
+        for (let i = children.length - 1; i >= 0; i--){
+            if (child == children[i]){
+                break;
+            }
+        }
+        return i;
+    };
 })

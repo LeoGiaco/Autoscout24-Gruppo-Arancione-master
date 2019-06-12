@@ -50,8 +50,12 @@
         {
             switch($_POST['action'])
             {
+                case "modify-show":
+                    getTable($tables[$_POST['num']]->table);
+                    break;
                 case "modify":
                     getTable($tables[$_POST['num']]->table);
+                    display();
                     break;
                 case "delete":
 
@@ -60,8 +64,11 @@
                 case "getall":
                     getTable($tables[$_POST['num']]->table);
                     break;
-                case "create":
+                case "create-show":
                     create();
+                    break;
+                case "create":
+                    
                     display();
                     break;
             }
@@ -105,7 +112,7 @@
                     break;
             }
             
-            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modify' data-toggle='modal'
+            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modify-show' data-toggle='modal'
                     data-target='#modify'><i class='fas fa-cogs'></i></button>
                   <button type='button 'class='btnvisibilita btn btn-outline-primary delete 'data-toggle='modal'
                     data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
@@ -148,7 +155,7 @@
         $stmt->execute();
     }
 
-    function getTable($name)
+    function getTable($name, $index)
     {
         global $db;
 
@@ -164,9 +171,7 @@
         {
             echo "<div class='modal-body row'>
             <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
-            <input type='text' class='form-control offset-sm-1 col-sm-8'
-              placeholder='ao'>
-            </div>";
+            <input type='text' class='form-control offset-sm-1 col-sm-8'></div>";
         }
     }
 ?>
