@@ -101,7 +101,8 @@ $(()=>{
     function getChildIndex(child){
         var parent = child.parentNode;
         var children = parent.children;
-        for (let i = children.length - 1; i >= 0; i--){
+        var i;
+        for (i = children.length - 1; i >= 0; i--){
             if (child == children[i]){
                 break;
             }

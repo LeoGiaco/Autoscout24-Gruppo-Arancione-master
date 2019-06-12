@@ -51,7 +51,7 @@
             switch($_POST['action'])
             {
                 case "modify-show":
-                    getTable($tables[$_POST['num']]->table);
+                    getTable($tables[$_POST['num']]->table, $tables[$_POST['row-index']]);
                     break;
                 case "modify":
                     getTable($tables[$_POST['num']]->table);
@@ -80,34 +80,29 @@
     function display()
     {
         global $tables;
-        global $db;
 
         $table = $tables[$_POST['num']]->table;
         $columns = $tables[$_POST['num']]->columns;
 
-        $sql = "SELECT * FROM $table";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = getValues($_POST['num']);
 
         $part1 = "<table class='table table-striped'><thead><tr>";
-        foreach($columns as $col)
-            $part1 .= "<th scope='col'>".$col."</th>";
+        foreach($columns as $colname)
+            $part1 .= "<th scope='col'>".$colname."</th>";
         $part1 .="<th scope='col'>edit</th></tr></thead>";
 
         echo $part1;
 
         $part2 = "<tbody>";
-        foreach($rows as $row)
+        foreach($rows as $rowValues)
         {
             $part2 .= "<tr>";
 
             $i = 0;
-            foreach($row as $col)
+            foreach($rowValues as $colValue)
             {
                 if($i++ < 5)
-                    $part2 .= "<td>".$col."</td>";
+                    $part2 .= "<td>".$colValue."</td>";
                 else
                     break;
             }
@@ -118,18 +113,6 @@
                     data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
         }
         echo $part2;
-
-        // foreach($rows as $row)
-        // {   
-        //     $total = implode(' - ', array_slice($row,0,5));
-
-        //     echo "<li class='item row'><div class='col-sm-8'>".$total."</div>
-        //     <button type='button' class='btnvisibilita btn btn-outline-primary modifica col-sm-2' data-toggle='modal'
-        //       data-target='#Modalmodifica'><i class='fas fa-cogs'></i></button>
-        //     <button type='button 'class='btnvisibilita btn btn-outline-primary delete col-sm-2 'data-toggle='modal'
-        //       data-target='#ModalDelete'><i class='far fa-trash-alt'></i></button>
-        //     </li>";
-        // }
     }
 
     function checkExistence($tableName)
@@ -155,8 +138,9 @@
         $stmt->execute();
     }
 
-    function getTable($name, $index)
+    function getTable($name, $rowindex = null)
     {
+        global $tables;
         global $db;
 
         $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
@@ -166,13 +150,35 @@
 
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $values;
+        if(isset($rowindex))
+            $values = getValues($_POST['num']);
+
         $index = 0;
         foreach($rows as $row)
         {
+            $textVal = '';
+            if(isset($rowindex))
+                $textVal = $values[$index][$row['COLUMN_NAME']];
             echo "<div class='modal-body row'>
             <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
-            <input type='text' class='form-control offset-sm-1 col-sm-8'></div>";
+            <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
         }
+    }
+
+    function getValues($tableIndex)
+    {
+        global $tables;
+        global $db;
+
+        $table = $tables[$tableIndex]->table;
+        $columns = $tables[$tableIndex]->columns;
+
+        $sql = "SELECT * FROM $table";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 ?>
 
