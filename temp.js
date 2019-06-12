@@ -110,11 +110,15 @@ $(()=>{
         });
     });
         
-    $(document).on('click','.delete-show',function(e){
+    $(document).on('click','.delete-click',function(e){
+        selezione = getChildIndex($(e.target).parentsUntil("tbody").last());
+    });
+
+    $(".delete").click(function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"delete");
-        formData.append('row-index',getChildIndex($(e.target).parentsUntil("tbody").last()));
+        formData.append('row-index',selezione);
 
         $.ajax({
             url: "bottone.php",

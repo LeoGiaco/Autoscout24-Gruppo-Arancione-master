@@ -58,7 +58,7 @@
                     display();
                     break;
                 case "delete":
-                    delete($tables[$_POST['num']]->table, $tables[$_POST['row-index']]);
+                    delete($tables[$_POST['num']]->table, $_POST['row-index']);
                     display();
                     break;
                 case "getall":
@@ -106,7 +106,7 @@
             
             $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modify-show' data-toggle='modal'
                     data-target='#modify'><i class='fas fa-cogs'></i></button>
-                  <button type='button 'class='btnvisibilita btn btn-outline-primary 'data-toggle='modal'
+                  <button type='button 'class='btnvisibilita btn btn-outline-primary delete-click 'data-toggle='modal'
                     data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
         }
         echo $part2;
@@ -136,9 +136,10 @@
     }
 
     function delete($tbl, $rowindex)
-    {
+    {       
+        global $db;
 
-        $sql = "DELETE FROM $tbl WHERE ";
+        $sql = "EXECUTE sp".substr($tbl,3)."Delete ".getPrimaryKeyValues($tbl)[$rowindex][getPrimaryKey($tbl)];
         $stmt = $db->prepare($sql);
         $stmt->execute();
     }
@@ -191,17 +192,26 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function getPrimaryKey($tableIndex)
+    function getPrimaryKey($tableName)
     {
-        global $tables;
         global $db;
-
-        $table = $tables[$tableIndex]->table;
-        $columns = $tables[$tableIndex]->columns;
 
         $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
         WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1
-        ORDER BY TABLE_NAME";
+        AND TABLE_NAME = '$tableName'";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['COLUMN_NAME'];
+    }
+
+    function getPrimaryKeyValues($tableName)
+    {
+        global $db;
+
+        $primaryKeyName = getPrimaryKey($tableName);
+
+        $sql = "SELECT $primaryKeyName FROM $tableName";
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
