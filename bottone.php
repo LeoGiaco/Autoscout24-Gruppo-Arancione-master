@@ -52,7 +52,6 @@
             {
                 case "modify":
                     getTable($tables[$_POST['num']]->table);
-                    display();
                     break;
                 case "delete":
 
