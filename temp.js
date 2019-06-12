@@ -5,7 +5,9 @@ $(()=>{
         $('.display').remove();
         var formData = new FormData();
         formData.append('num',$(e.target).val());
+
         tabella = $(e.target).val();
+
         $.ajax({
             url: "bottone.php",
             type: "POST",
@@ -22,6 +24,7 @@ $(()=>{
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"getall");
+
         $.ajax({
             url: "bottone.php",
             type: "POST",
@@ -34,10 +37,11 @@ $(()=>{
         });
     });
 
-    $(".modify").click(function(e){
+    $(document).on('click','.modify',function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"modify");
+
         $.ajax({
             url: "bottone.php",
             type: "POST",
@@ -45,8 +49,8 @@ $(()=>{
             processData: false,
             contentType: false
         }).done(function(html){
-            $("ul").empty();
-            $("ul").append(html.slice(0,html.indexOf('<!')));
+            $("#modify .modal-body").remove();
+            $("#modify .modal-content").append(html.slice(0,html.indexOf('<!')));
         });
     });
         
@@ -55,6 +59,7 @@ $(()=>{
         formData.append('num',tabella);
         formData.append('action',"create");
         formData.append('tblname',$(e.target).html());
+
         $.ajax({
             url: "bottone.php",
             type: "POST",
@@ -67,10 +72,11 @@ $(()=>{
         });
     });
         
-    $(".delete").click(function(e){
+    $(document).on('click','.delete',function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"delete");
+
         $.ajax({
             url: "bottone.php",
             type: "POST",

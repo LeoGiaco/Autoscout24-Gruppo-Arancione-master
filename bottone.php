@@ -51,7 +51,7 @@
             switch($_POST['action'])
             {
                 case "modify":
-
+                    getTable($tables[$_POST['num']]->table);
                     display();
                     break;
                 case "delete":
@@ -62,7 +62,7 @@
                     getTable($tables[$_POST['num']]->table);
                     break;
                 case "create":
-
+                    create();
                     display();
                     break;
             }
@@ -106,7 +106,7 @@
                     break;
             }
             
-            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modifica ' data-toggle='modal'
+            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modify' data-toggle='modal'
                     data-target='#modify'><i class='fas fa-cogs'></i></button>
                   <button type='button 'class='btnvisibilita btn btn-outline-primary delete 'data-toggle='modal'
                     data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
