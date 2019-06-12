@@ -87,7 +87,7 @@
           </div> -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary modify">Save changes</button>
+            <button type="button" class="btn btn-primary modify" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">NO,Close</button>
-            <button type="button" class="btn btn-primary delete">YES</button>
+            <button type="button" class="btn btn-primary delete" data-dismiss="modal">YES</button>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button  type="button" class="btn btn-primary create">Save changes</button>
+            <button  type="button" class="btn btn-primary create" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
