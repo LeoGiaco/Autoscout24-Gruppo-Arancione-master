@@ -7,7 +7,7 @@
     overflow-y:scroll;
   }
 .ex2 {
-    height: 633px;
+    height: 650px;
     overflow-y:scroll;
 }
 .tblbutton{
@@ -18,4 +18,8 @@
 }
 body{
     background-color: rgba(211, 211, 211, 0.432);
+}
+
+.btnnuovo{
+    margin-top: 25px;
 }
