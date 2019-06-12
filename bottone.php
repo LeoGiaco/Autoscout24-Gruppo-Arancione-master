@@ -104,9 +104,9 @@
                     break;
             }
             
-            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modify-show' data-toggle='modal'
+            $part2 .= "<td><button type='button' class='btnvisibilita btn btn-warning modify-show' data-toggle='modal'
                     data-target='#modify'><i class='fas fa-cogs'></i></button>
-                  <button type='button 'class='btnvisibilita btn btn-outline-primary delete-click 'data-toggle='modal'
+                  <button type='button 'class='btnvisibilita btn btn-warning delete-click 'data-toggle='modal'
                     data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
         }
         echo $part2;
