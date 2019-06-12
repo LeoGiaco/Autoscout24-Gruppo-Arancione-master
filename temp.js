@@ -1,4 +1,5 @@
 var tabella;
+var selezione;
 
 $(()=>{
 
@@ -48,7 +49,11 @@ $(()=>{
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action','modify-show');
-        formData.append('row-index',getChildIndex(e.target.parentNode.parentNode))
+        selezione = getChildIndex($(e.target).parentsUntil("tbody").last());
+        formData.append('row-index',selezione)
+
+        // Crea array di valori presi dagli input.
+        // Passa array a formData.
 
         $.ajax({
             url: "bottone.php",
@@ -61,13 +66,46 @@ $(()=>{
             $("#modify .modal-body").append(html.slice(0,html.indexOf('<!')));
         });
     });
-        
-    $(".create-show").click(function(e){
+
+    $(".modify").click(function(e){
         var formData = new FormData();
         formData.append('num',tabella);
-        formData.append('action',"create-show");
+        formData.append('action','modify');
+        formData.append('row-index',selezione)
+
+        // Crea array di valori presi dagli input.
+        var a = [];
+        $("#modify .modal-body .row").each(function(elem)
+        {
+            let name = $($(this).children().get(0)).html();
+            name = name.substr(0,name.length - 1);
+            let val = $($(this).children().get(1)).val();
+            a.push(name + "='" + val + "'");
+        });
+        // Passa array a formData.
+        formData.append('values',a);
+
+        $.ajax({
+            url: "bottone.php",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function(html){
+            $("#modify .modal-body").empty();
+            $("#modify .modal-body").append(html.slice(0,html.indexOf('<!')));
+        });
+    });
+    
+    $(".create").click(function(e){
+        var formData = new FormData();
+        formData.append('num',tabella);
+        formData.append('action',"create");
         formData.append('tblname',$(e.target).html());
         formData.append('row',);
+
+        // Crea array di valori presi dagli input.
+        // Passa array a formData.
 
         $.ajax({
             url: "bottone.php",
@@ -81,10 +119,15 @@ $(()=>{
         });
     });
         
-    $(document).on('click','.delete',function(e){
+    $(document).on('click','.delete-click',function(e){
+        selezione = getChildIndex($(e.target).parentsUntil("tbody").last());
+    });
+
+    $(".delete").click(function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"delete");
+        formData.append('row-index',selezione);
 
         $.ajax({
             url: "bottone.php",
@@ -99,14 +142,10 @@ $(()=>{
     });
 
     function getChildIndex(child){
-        var parent = child.parentNode;
-        var children = parent.children;
-        var i;
-        for (i = children.length - 1; i >= 0; i--){
-            if (child == children[i]){
-                break;
-            }
-        }
-        return i;
+        var parent = child.parent();
+        var children = parent.children();
+        for (let i = 0; i < children.length; i++)
+            if (child[0] == children[i])
+                return i;
     };
 })

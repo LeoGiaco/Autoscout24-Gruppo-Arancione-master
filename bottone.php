@@ -51,24 +51,21 @@
             switch($_POST['action'])
             {
                 case "modify-show":
-                    getTable($tables[$_POST['num']]->table, $tables[$_POST['row-index']]);
+                    getTable($tables[$_POST['num']]->table, $_POST['row-index']);
                     break;
                 case "modify":
-                    getTable($tables[$_POST['num']]->table);
+                    modify($tables[$_POST['num']]->table, $_POST['row-index']);
                     display();
                     break;
                 case "delete":
-
+                    delete($tables[$_POST['num']]->table, $_POST['row-index']);
                     display();
                     break;
                 case "getall":
                     getTable($tables[$_POST['num']]->table);
                     break;
-                case "create-show":
-                    create();
-                    break;
                 case "create":
-                    
+                    create($tables[$_POST['num']]->table);
                     display();
                     break;
             }
@@ -109,7 +106,7 @@
             
             $part2 .= "<td><button type='button' class='btnvisibilita btn btn-outline-primary modify-show' data-toggle='modal'
                     data-target='#modify'><i class='fas fa-cogs'></i></button>
-                  <button type='button 'class='btnvisibilita btn btn-outline-primary delete 'data-toggle='modal'
+                  <button type='button 'class='btnvisibilita btn btn-outline-primary delete-click 'data-toggle='modal'
                     data-target='#delete'><i class='far fa-trash-alt'></i></button></td></tr>";
         }
         echo $part2;
@@ -138,32 +135,55 @@
         $stmt->execute();
     }
 
-    function getTable($name, $rowindex = null)
+    function modify($tbl, $rowindex)
     {
-        global $tables;
         global $db;
 
-        $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
-                where TABLE_NAME = '$name'"; // Seleziona i nomi delle tabelle e delle colonne.
+        $sql = "EXECUTE sp".substr($tbl,3)."Update SET ".$_POST['values']." WHERE ".getPrimaryKey($tbl)."='".getPrimaryKeyValues($tbl)[$rowindex][getPrimaryKey($tbl)]."'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
+    }
 
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    function delete($tbl, $rowindex)
+    {       
+        global $db;
+
+        $sql = "EXECUTE sp".substr($tbl,3)."Delete ".getPrimaryKeyValues($tbl)[$rowindex][getPrimaryKey($tbl)];
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+    }
+
+    function getTable($name, $rowindex = null)
+    {
+        $rows = getTableAndColumnsNames($name);
 
         $values;
         if(isset($rowindex))
             $values = getValues($_POST['num']);
 
-        $index = 0;
         foreach($rows as $row)
         {
             $textVal = '';
             if(isset($rowindex))
-                $textVal = $values[$index][$row['COLUMN_NAME']];
+                $textVal = $values[$rowindex][$row['COLUMN_NAME']];
+
             echo "<div class='modal-body row'>
             <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
             <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
         }
+    }
+
+    function getTableAndColumnsNames($tableName)
+    {
+        global $tables;
+        global $db;
+
+        $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
+                where TABLE_NAME = '$tableName'"; // Seleziona il nome della tabella e delle sue colonne.
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getValues($tableIndex)
@@ -175,6 +195,32 @@
         $columns = $tables[$tableIndex]->columns;
 
         $sql = "SELECT * FROM $table";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getPrimaryKey($tableName)
+    {
+        global $db;
+
+        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+        WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1
+        AND TABLE_NAME = '$tableName'";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['COLUMN_NAME'];
+    }
+
+    function getPrimaryKeyValues($tableName)
+    {
+        global $db;
+
+        $primaryKeyName = getPrimaryKey($tableName);
+
+        $sql = "SELECT $primaryKeyName FROM $tableName";
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
