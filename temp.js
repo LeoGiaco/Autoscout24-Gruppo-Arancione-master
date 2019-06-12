@@ -34,7 +34,7 @@ $(()=>{
         });
     });
 
-    $(".modify").click(function(e){
+    $(document).on('click','.modify',function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"modify");
@@ -67,7 +67,7 @@ $(()=>{
         });
     });
         
-    $(".delete").click(function(e){
+    $(document).on('click','.delete',function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"delete");
