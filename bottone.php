@@ -25,7 +25,7 @@
 
     $tables = array();
 
-    $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
+    $sql = "SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE from INFORMATION_SCHEMA.COLUMNS
                 where SUBSTRING(TABLE_NAME,0,2) = 't' ORDER BY TABLE_NAME"; // Seleziona i nomi delle tabelle e delle colonne.
     $stmt = $db->prepare($sql);
     $stmt->execute();
@@ -198,7 +198,8 @@
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
     }
 
     function getPrimaryKey($tableName)
