@@ -1,53 +1,21 @@
-.body{
-    background-color: blue;
+.row{
+    margin-right: 0px;
+    margin-left: 0px;
 }
-
-.btnvisibilita
-{
-    visibility: visible;
-}
-
-.btn
-{
-    margin: 0px;
-}
-
-.item{
-    border:1px solid rgba(209, 206, 206, 0.76);
-    border-radius: 2px;
-}
-.prova{
-    border: 1px solid black;
-    border-radius: 3px;
-    background-color: white;
-}
-
-ul{
-    padding-left:0px;
-}
-
 .ex1 {
-    margin:5px 10px 0px 5px;
-
-    height: 733px;
+    height: 751px;
     overflow-y:scroll;
   }
-  .ex2 {
-    margin:5px 0px 0px 5px;
+.ex2 {
     height: 633px;
     overflow-y:scroll;
-  }
-
+}
 .tblbutton{
-    margin: 5px 0px 0px 5px;
+    width: 96%;
+    margin-left: 4%;
+    border-radius: 0px;
+    margin-bottom: 2px;
 }
-
-.btnnuovo{
-    margin-top:10px;
+body{
+    background-color: rgba(211, 211, 211, 0.432);
 }
-
-
-
-
-
-

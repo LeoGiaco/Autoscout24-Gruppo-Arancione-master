@@ -25,7 +25,7 @@
         $val = 0;
         foreach($rows as $row)
         {
-            echo "<button class='tblbutton btn btn-outline-primary' value = '$val' id=" . $row['table_name'] . ">" . $row['table_name'] . "</button>";
+            echo "<button class=' btn btn-warning tblbutton' value = '$val' id=" . $row['table_name'] . ">" . $row['table_name'] . "</button>";
             $val++;
         }
     }
@@ -33,32 +33,108 @@
 ?>
 
 
-
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>prova</title>
+  <title>DataBase</title>
   <!-- Required meta tags -->
-  <link rel="stylesheet" href="css/style2.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
     integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="temp.js"></script>
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="css/style2.css">
 </head>
 
-<body class="body">
-  <div class="container-fluid row">
-    <div class=" offset-sm-1 list-group col-sm-3 column ex1 prova">
-      <?php displayButtons(); ?>
+<body>
+  <!-- modal modifica -->
+  <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Modifica campo/i</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary modify" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
     </div>
-    <!-- contenitore -->
+  </div>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Sicuro di voler eliminare?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary delete" data-dismiss="modal">YES</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal crea -->
+  <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Nuovo campo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary create" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- contenuto -->
+  <div class="row">
+    <div class="col-md-3 list-group ex1"><?php displayButtons(); ?></div>
+    <div class="col-md-9">
+      <div class="ex2">
+      </div>
+      <div>
+        <button type="button" class="btn offset-md-5 col-md-2 btn-warning btnnuovo" data-toggle="modal"
+          data-target="#create">Nuovo</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="container-fluid row">
+    <div class=" offset-sm-1 list-group col-sm-3 column ex1 prova">
+      prova
+    </div>
     <div class="container col-sm-8 row">
       <div class="column offset-sm-1 col-sm-10 prova">
         <div class="ex2">
@@ -68,73 +144,7 @@
             data-target="#create">Nuovo</button>
         </div>
       </div>
-    </div>
-  <!-- modal modifica -->
-  <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modifica campo/i</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary modify" data-dismiss="modal">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <!-- Modal delete -->
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Sicuro di voler eliminare?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary delete" data-dismiss="modal">YES</button>
-      </div>
-    </div>
-  </div>
-</div>
-    <!-- Modal crea -->
-  <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Nuovo campo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary create" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-
- 
-
-
-
-
+    </div> -->
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
