@@ -75,12 +75,13 @@ $(()=>{
 
         // Crea array di valori presi dagli input.
         var a = [];
-        $($("table tbody").get(selezione)).children().each(function(elem)
+        $($("#modify .modal-body .row").each(function(elem)
         {
-            a.push($(this).html());
-        });
+            a.push("'"+$($(this).children().get(1)).val()+"'");
+        }));
         // Passa array a formData.
         formData.append('values',a);
+
 
         $.ajax({
             url: "bottone.php",
@@ -89,8 +90,8 @@ $(()=>{
             processData: false,
             contentType: false
         }).done(function(html){
-            $("#modify .modal-body").empty();
-            $("#modify .modal-body").append(html.slice(0,html.indexOf('<!')));
+            $(".ex2").empty();
+            $(".ex2").append(html.slice(0,html.indexOf('<!')));
         });
     });
     
