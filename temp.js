@@ -1,7 +1,14 @@
 var tabella;
 
 $(()=>{
+
+    $(".btnnuovo").prop("disabled",true);
+
+
     $(".tblbutton").click(function(e){
+
+        $(".btnnuovo").prop("disabled",false);
+
         $('.display').remove();
         var formData = new FormData();
         formData.append('num',$(e.target).val());
