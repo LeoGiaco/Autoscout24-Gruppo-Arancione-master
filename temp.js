@@ -75,12 +75,9 @@ $(()=>{
 
         // Crea array di valori presi dagli input.
         var a = [];
-        $("#modify .modal-body .row").each(function(elem)
+        $($("table tbody").get(selezione)).children().each(function(elem)
         {
-            let name = $($(this).children().get(0)).html();
-            name = name.substr(0,name.length - 1);
-            let val = $($(this).children().get(1)).val();
-            a.push(name + "='" + val + "'");
+            a.push($(this).html());
         });
         // Passa array a formData.
         formData.append('values',a);

@@ -130,22 +130,6 @@
     </div>
   </div>
 
-
-  <!-- <div class="container-fluid row">
-    <div class=" offset-sm-1 list-group col-sm-3 column ex1 prova">
-      prova
-    </div>
-    <div class="container col-sm-8 row">
-      <div class="column offset-sm-1 col-sm-10 prova">
-        <div class="ex2">
-        </div>
-        <div class="row">
-        <button type="button" class="btn offset-sm-5 col-sm-2 btn-outline-primary btnnuovo " data-toggle="modal"
-            data-target="#create">Nuovo</button>
-        </div>
-      </div>
-    </div> -->
-
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

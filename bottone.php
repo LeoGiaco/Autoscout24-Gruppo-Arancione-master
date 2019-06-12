@@ -139,7 +139,7 @@
     {
         global $db;
 
-        $sql = "EXECUTE sp".substr($tbl,3)."Update SET ".$_POST['values']." WHERE ".getPrimaryKey($tbl)."='".getPrimaryKeyValues($tbl)[$rowindex][getPrimaryKey($tbl)]."'";
+        $sql = "EXECUTE sp".substr($tbl,3)."Update ".$_POST['values'];
         $stmt = $db->prepare($sql);
         $stmt->execute();
     }
