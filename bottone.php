@@ -51,20 +51,23 @@
             switch($_POST['action'])
             {
                 case "modify":
-                    
+
+                    display();
                     break;
                 case "delete":
 
+                    display();
                     break;
                 case "getall":
                     getTable($tables[$_POST['num']]->table);
                     break;
                 case "create":
+
+                    display();
                     break;
             }
         }
-        // Check con isset per errore null.
-        if($_POST['action'] != "getall")
+        else
             display();
     }
 
