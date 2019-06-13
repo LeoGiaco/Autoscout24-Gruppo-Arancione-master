@@ -13,7 +13,7 @@
     try         // Connessione al databse.
     {
         $dbHostname = "192.168.245.8\\SQLEXPRESS2017";
-        $dbName = "AutoScout24GruppoArancione";
+        $dbName = "AutoScout24GruppoGrigio";
         $dbLogin = "sa";
         $dbPassword = "vittorio";
         
@@ -38,6 +38,7 @@
         if($index != -1)
         {
             if(count($tables[$index]->columns) < 5)
+            
                 array_push($tables[$index]->columns,$row['COLUMN_NAME']);   // Aggiunge una colonna a una tabella esistente.
         }
         else
@@ -161,16 +162,33 @@
         if(isset($rowindex))
             $values = getValues($_POST['num']);
 
-        foreach($rows as $row)
+        if(count($rows) > 1)
+        {
+            foreach($rows as $row)
+            {
+                $textVal = '';
+                if(isset($rowindex))
+                    $textVal = $values[$rowindex][$row['COLUMN_NAME']];
+
+                echo "<div class='modal-body row'>
+                <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
+            }
+        }
+        else
         {
             $textVal = '';
             if(isset($rowindex))
-                $textVal = $values[$rowindex][$row['COLUMN_NAME']];
+                $textVal = $values[$rowindex][$rows[0]['COLUMN_NAME']];
 
             echo "<div class='modal-body row'>
-            <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+            <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Vecchio):</label>
             <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
+            echo "<div class='modal-body row'>
+            <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Nuovo):</label>
+            <input type='text' class='form-control offset-sm-1 col-sm-8'></div>";
         }
+
     }
 
     function getTableAndColumnsNames($tableName)

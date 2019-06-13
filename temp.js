@@ -51,9 +51,7 @@ $(()=>{
         formData.append('action','modify-show');
         selezione = getChildIndex($(e.target).parentsUntil("tbody").last());
         formData.append('row-index',selezione)
-
-        // Crea array di valori presi dagli input.
-        // Passa array a formData.
+        formData.append('col-num',$($(e.target)).parentsUntil("tbody").last().children().length - 1);
 
         $.ajax({
             url: "bottone.php",
