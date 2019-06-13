@@ -131,7 +131,9 @@
 
     function create($tbl)
     {
-        $sql = "INSERT INTO $tbl (colonna) VALUES (valori)";
+        global $db;
+
+        $sql = "EXECUTE sp".substr($tbl,3)."Insert ".$_POST['values'];
         $stmt = $db->prepare($sql);
         $stmt->execute();
     }
@@ -162,7 +164,7 @@
         if(isset($rowindex))
             $values = getValues($_POST['num']);
 
-        if(count($rows) > 1)
+        if(count($rows) > 1 || !isset($rowindex))
         {
             foreach($rows as $row)
             {
@@ -178,8 +180,7 @@
         else
         {
             $textVal = '';
-            if(isset($rowindex))
-                $textVal = $values[$rowindex][$rows[0]['COLUMN_NAME']];
+            $textVal = $values[$rowindex][$rows[0]['COLUMN_NAME']];
 
             echo "<div class='modal-body row'>
             <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Vecchio):</label>

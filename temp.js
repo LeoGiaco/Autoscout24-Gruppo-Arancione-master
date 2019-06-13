@@ -5,7 +5,6 @@ $(()=>{
 
     $(".btnnuovo").prop("disabled",true);
 
-
     $(".tblbutton").click(function(e){
 
         $(".btnnuovo").prop("disabled",false);
@@ -32,6 +31,7 @@ $(()=>{
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"getall");
+        selezione = getChildIndex($(e.target).parentsUntil("tbody").last());
 
         $.ajax({
             url: "bottone.php",
@@ -51,7 +51,6 @@ $(()=>{
         formData.append('action','modify-show');
         selezione = getChildIndex($(e.target).parentsUntil("tbody").last());
         formData.append('row-index',selezione)
-        formData.append('col-num',$($(e.target)).parentsUntil("tbody").last().children().length - 1);
 
         $.ajax({
             url: "bottone.php",
@@ -98,10 +97,16 @@ $(()=>{
         formData.append('num',tabella);
         formData.append('action',"create");
         formData.append('tblname',$(e.target).html());
-        formData.append('row',);
+        formData.append('row-index',selezione)
 
         // Crea array di valori presi dagli input.
+        var a = [];
+        $($("#create .modal-body .row").each(function(elem)
+        {
+            a.push("'"+$($(this).children().get(1)).val()+"'");
+        }));
         // Passa array a formData.
+        formData.append('values',a);
 
         $.ajax({
             url: "bottone.php",
