@@ -3,11 +3,11 @@ var selezione;
 
 $(()=>{
 
-    $(".btnnuovo").hide();
+    $(".create-show").hide();
 
     $(".tblbutton").click(function(e){
 
-        $(".btnnuovo").show();
+        $(".create-show").show();
 
         $('.display').remove();
         var formData = new FormData();
@@ -27,7 +27,7 @@ $(()=>{
         });
     });
 
-    $(".btnnuovo").click(function(e){
+    $(".create-show").click(function(e){
         var formData = new FormData();
         formData.append('num',tabella);
         formData.append('action',"getall");
@@ -72,13 +72,25 @@ $(()=>{
 
         // Crea array di valori presi dagli input.
         var a = [];
+        var ajax = true;
         $($("#modify .modal-body .row").each(function(elem)
         {
-            a.push("'"+child.val()+"'");
+            let val = $($(this).children().get(1)).val().trim();
+            if(val != '')
+                a.push("'"+val+"'");
+            else
+            {
+                alert("Valore vuoto!");
+                ajax = false;
+                return;
+            }
         }));
+
+        if(!ajax)
+            return;
+
         // Passa array a formData.
         formData.append('values',a);
-
 
         $.ajax({
             url: "bottone.php",
@@ -102,12 +114,27 @@ $(()=>{
 
         // Crea array di valori presi dagli input.
         var a = [];
+        var ajax = true;
         $($("#create .modal-body .row").each(function(elem)
         {
             let child = $($(this).children().get(1));
             if(!child.prop('readonly'))
-                a.push("'"+child.val()+"'");
+            {
+                let val = child.val().trim();
+                if(val != '')
+                    a.push("'"+val+"'");
+                else
+                {
+                    alert("Valore vuoto!");
+                    ajax = false;
+                    return;
+                }
+            }
         }));
+
+        if(!ajax)
+            return;
+
         // Passa array a formData.
         formData.append('values',a);
 

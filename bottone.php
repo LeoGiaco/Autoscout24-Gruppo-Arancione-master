@@ -32,15 +32,16 @@
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // (function() {   // Self-invoked.
-    //     foreach($_POST as $k => &$v) // Value passed by reference.
-    //     {
-    //         $v = trim($v);  // So we are sure it is whitespace free at both ends.        
-    //         // Sanitize string.
-    //         $v = filter_var($v, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
-    //     }
-    //     unset($v);  // Remove referenced variable.
-    // })();
+    (function() {   // Self-invoked.
+        foreach($_POST as $k => &$v) // Value passed by reference.
+        {
+            $v = trim($v);  // So we are sure it is whitespace free at both ends.    
+            // Sanitize string.
+            $v = filter_var($v, FILTER_SANITIZE_ENCODED, FILTER_FLAG_STRIP_HIGH);
+            $v = str_replace( "&#39;", "'", $v ); 
+        }
+        unset($v);  // Remove referenced variable.
+    })();
 
     foreach($rows as $row)
     {
@@ -202,11 +203,11 @@
             $textVal = $values[$rowindex][$rows[0]['COLUMN_NAME']];
 
             echo "<div class='modal-body row'>
-            <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Vecchio):</label>
-            <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
+            <label for='exampleFormControlInput1' class='col-sm-3 ' hidden>".$rows[0]['COLUMN_NAME']." (Vecchio):</label>
+            <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8' readonly hidden></div>";
             echo "<div class='modal-body row'>
             <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Nuovo):</label>
-            <input type='text' class='form-control offset-sm-1 col-sm-8'></div>";
+            <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
         }
 
     }
