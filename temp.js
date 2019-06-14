@@ -3,11 +3,11 @@ var selezione;
 
 $(()=>{
 
-    $(".btnnuovo").prop("disabled",true);
+    $(".btnnuovo").hide();
 
     $(".tblbutton").click(function(e){
 
-        $(".btnnuovo").prop("disabled",false);
+        $(".btnnuovo").show();
 
         $('.display').remove();
         var formData = new FormData();
