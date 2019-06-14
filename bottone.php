@@ -10,7 +10,7 @@
         }
     }
 
-    try         // Connessione al databse.
+    try         // Connessione al database.
     {
         $dbHostname = "192.168.245.8\\SQLEXPRESS2017";
         $dbName = "AutoScout24GruppoGrigio";
@@ -32,6 +32,16 @@
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    // (function() {   // Self-invoked.
+    //     foreach($_POST as $k => &$v) // Value passed by reference.
+    //     {
+    //         $v = trim($v);  // So we are sure it is whitespace free at both ends.        
+    //         // Sanitize string.
+    //         $v = filter_var($v, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
+    //     }
+    //     unset($v);  // Remove referenced variable.
+    // })();
+
     foreach($rows as $row)
     {
         $index = checkExistence($row['TABLE_NAME']);    // Controlla se la tabella è già presente.
@@ -52,7 +62,7 @@
             switch($_POST['action'])
             {
                 case "modify-show":
-                    getTable($tables[$_POST['num']]->table, $_POST['row-index']);
+                    getTable($tables[$_POST['num']]->table, $_POST['row-index'], false);
                     break;
                 case "modify":
                     modify($tables[$_POST['num']]->table, $_POST['row-index']);
@@ -63,7 +73,7 @@
                     display();
                     break;
                 case "getall":
-                    getTable($tables[$_POST['num']]->table);
+                    getTable($tables[$_POST['num']]->table, null, false);
                     break;
                 case "create":
                     create($tables[$_POST['num']]->table);
@@ -74,6 +84,10 @@
         else
             display();
     }
+
+    //
+    // IMPORTANTE: risolvere problema interi passati come varchar.
+    //
 
     function display()
     {
@@ -146,7 +160,7 @@
         $stmt = $db->prepare($sql);
         $stmt->execute();
     }
-
+    
     function delete($tbl, $rowindex)
     {       
         global $db;
@@ -156,9 +170,9 @@
         $stmt->execute();
     }
 
-    function getTable($name, $rowindex = null)
+    function getTable($name, $rowindex = null, $showCounter = true)
     {
-        $rows = getTableAndColumnsNames($name);
+        $rows = getTableAndColumnsNames($name, $showCounter);
 
         $values;
         if(isset($rowindex))
@@ -171,10 +185,15 @@
                 $textVal = '';
                 if(isset($rowindex))
                     $textVal = $values[$rowindex][$row['COLUMN_NAME']];
-
-                echo "<div class='modal-body row'>
-                <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
-                <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
+                
+                if(isset($row['IS_PRIMARY']) && $row['IS_PRIMARY'] == 1)
+                    echo "<div class='modal-body row'>
+                    <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                    <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8' readonly></div>";
+                else
+                    echo "<div class='modal-body row'>
+                    <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                    <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
             }
         }
         else
@@ -192,13 +211,17 @@
 
     }
 
-    function getTableAndColumnsNames($tableName)
+    function getTableAndColumnsNames($tableName, $showIdentity)
     {
         global $tables;
         global $db;
-
-        $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
-                where TABLE_NAME = '$tableName'"; // Seleziona il nome della tabella e delle sue colonne.
+        $sql = "";
+        if($showIdentity)
+            $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
+                    where TABLE_NAME = '$tableName'"; // Seleziona il nome della tabella e delle sue colonne.
+        else
+            $sql = "SELECT TABLE_NAME, COLUMN_NAME, columnproperty(object_id(TABLE_NAME),COLUMN_NAME,'IsIdentity') as IS_PRIMARY from INFORMATION_SCHEMA.COLUMNS
+                    WHERE TABLE_NAME = '$tableName'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
