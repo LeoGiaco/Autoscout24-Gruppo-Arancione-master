@@ -1,3 +1,17 @@
+/* Preloader */
+.preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-image: url('../img/loader.gif');
+    background-repeat: no-repeat; 
+    background-color: #FFF;
+    background-position: center;
+ }
+
 body{
     font-family: 'Raleway', sans-serif!important;
 }
@@ -8,7 +22,7 @@ body{
     margin-left: 0px;
 }
 .ex1 {
-    height: 751px;
+    height: 730px;
     overflow-y:scroll;
   }
 .ex2 {
@@ -32,9 +46,6 @@ body{
 
 .tblbutton:not(:disabled):not(.disabled):focus{
     /* background: linear-gradient(to right, #ff4b1f, #ff9068); */
-
-    background: linear-gradient(to right, #ff9068, #fd746c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
     background: linear-gradient(to right, #ED8F03, #FFB75E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
 }
@@ -47,9 +58,13 @@ body{
     margin-top: 25px;
 }
 
-.tblbutton:hover,.tblbutton:focus,.tblbutton:active, 
-.tblbutton:active:focus:not(:disabled):not(.disabled),
-.tblbutton:focus, .tblbutton:active, .tblbutton:hover{
+.tblbutton:hover,.tblbutton:focus,.tblbutton:active
+/* .tblbutton:active:focus:not(:disabled):not(.disabled),
+.tblbutton:focus, .tblbutton:active, .tblbutton:hover{ */{
     box-shadow: none!important;
     outline: 0;
+}
+
+.row{
+    margin: 10px;
 }

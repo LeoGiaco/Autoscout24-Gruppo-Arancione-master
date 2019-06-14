@@ -50,6 +50,8 @@
     <link rel="stylesheet" href="css/animate.css">
 
   <script src="temp.js"></script>
+
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -64,11 +66,17 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
     integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-
+    <!-- Cool Alert -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 </head>
 
 <body>
+
+    <!-- Prealoder -->
+    <div class="preloader"></div>
+
   <!-- modal modifica -->
   <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
     aria-hidden="true">
@@ -84,7 +92,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-warning modify" data-dismiss="modal">Save changes</button>
+          <input type="button" value="Save changes" class="btn btn-warning modify" data-dismiss="modal">
         </div>
       </div>
     </div>
@@ -121,11 +129,11 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-        </div>
+          <div class="modal-body">
+          </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-warning create" data-dismiss="modal">Save</button>
+          <input type="submit" value="Save" class="btn btn-warning create" data-dismiss="modal">
         </div>
       </div>
     </div>

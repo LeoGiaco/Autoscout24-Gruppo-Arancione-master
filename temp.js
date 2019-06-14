@@ -1,21 +1,10 @@
 var tabella;
 var selezione;
-
-var tempID=null;
-function animationClick(element, animation){
-    element = $(element);
-    element.click(
-      function() {
-        element.addClass('animated ' + animation);
-        //wait for animation to finish before removing classes
-        window.setTimeout( function(){
-            element.removeClass('animated ' + animation);
-        }, 2000);
-      }
-    );
-};
+var invalid = '\\|",;_()=^[]{}#°%§£<>*/+';
 
 $(()=>{
+
+    $('.preloader').fadeOut(2000);
 
     $(".create-show").hide();
 
@@ -41,13 +30,16 @@ $(()=>{
         });
     });
     
-    
 
-    $(".tblbutton").on('click', function(event) {
-        animationClick(,'zoomIn');
+    $(".tblbutton").click(function() {
+        var id = $("#"+this.id);
+        
+        id.addClass('animated ' + 'zoomIn');
+        window.setTimeout( function(){
+            id.removeClass('animated ' + 'zoomIn');
+        }, 500);
     });
 
-    animationClick($("#"+event.target.id),'zoomIn');
 
     $(".create-show").click(function(e){
         var formData = new FormData();
@@ -99,10 +91,27 @@ $(()=>{
         {
             let val = $($(this).children().get(1)).val().trim();
             if(val != '')
+            {
+                for(let i = 0; i < val.length; i++)
+                {
+                    if(invalid.indexOf(val.charAt(i)) > -1)
+                    {
+                        $.alert({
+                            title: 'Ocio!',
+                            content: ("Carattere illegale: " + val.charAt(i) + "."),
+                        });
+                        ajax = false;
+                        return;
+                    }
+                }
                 a.push("'"+val+"'");
+            }
             else
             {
-                alert("Valore vuoto!");
+                $.alert({
+                    title: 'Ocio!',
+                    content: 'Valore vuoto!',
+                });
                 ajax = false;
                 return;
             }
@@ -123,7 +132,10 @@ $(()=>{
         }).done(function(html){
             $(".ex2").empty();
             $(".ex2").append(html.slice(0,html.indexOf('<!')));
-            alert("Modifica Avvenuta con Successo");
+            $.alert({
+                title: 'Modifica eseguita!',
+                content: 'Modifica Avvenuta con Successo.',
+            });
         });
     });
     
@@ -144,10 +156,27 @@ $(()=>{
             {
                 let val = child.val().trim();
                 if(val != '')
+                {
+                    for(let i = 0; i < val.length; i++)
+                    {
+                        if(invalid.indexOf(val.charAt(i)) > -1)
+                        {
+                            $.alert({
+                                title: 'STOP!',
+                                content: ("Carattere illegale: " + val.charAt(i) + "."),
+                            });
+                            ajax = false;
+                            return;
+                        }
+                    }
                     a.push("'"+val+"'");
+                }
                 else
                 {
-                    alert("Valore vuoto!");
+                    $.alert({
+                        title: 'Ocio!',
+                        content: 'Valore vuoto!',
+                    });
                     ajax = false;
                     return;
                 }
@@ -168,8 +197,11 @@ $(()=>{
             contentType: false
         }).done(function(html){
             $(".ex2").empty();
-            $(".ex2").append(html.slice(0,html.indexOf('<!')));7
-            alert("Creazione Avvenuta con Successo");
+            $(".ex2").append(html.slice(0,html.indexOf('<!')));
+            $.alert({
+                title: 'Bene così!',
+                content: ("Creazione Avvenuta con Successo"),
+            });
         });
     });
         
@@ -192,7 +224,10 @@ $(()=>{
         }).done(function(html){
             $(".ex2").empty();
             $(".ex2").append(html.slice(0,html.indexOf('<!')));
-            alert("Eliminazione Avvenuta con Successo");
+            $.alert({
+                title: 'Oramai è andata!',
+                content: ("Eliminazione Avvenuta con Successo"),
+            });
         });
     });
 

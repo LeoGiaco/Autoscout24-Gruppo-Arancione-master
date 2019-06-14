@@ -32,17 +32,18 @@
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $invalid = '\\|"\',;.:-_()=^[]{}@#°§£<>*/+';
+    $invalid = '\\|";_()=^[]{}#°%§£<>*/+';
 
     (function() {   // Self-invoked.
+        global $invalid;
         foreach($_POST as $k => &$v) // Value passed by reference.
         {
             $v = trim($v);  // So we are sure it is whitespace free at both ends.    
             // Sanitize string.
             for($i = 0; $i < strlen($v); $i++)
             {
-                if($invalid.contains($v[$i]))
-                    throw new Exception("Carattere invalido inserito: ".$v[$i].".");
+                if(strpos($invalid, substr($v,$i,1)) !== false)
+                    throw new Exception(" ----> Carattere invalido inserito: ".substr($v,$i,1).". <---- ");
             }
         }
         unset($v);  // Remove referenced variable.
@@ -107,7 +108,7 @@
         $part1 = "<table class='table table-striped'><thead><tr>";
         foreach($columns as $colname)
             $part1 .= "<th scope='col'>".$colname."</th>";
-        $part1 .="<th scope='col'>edit</th></tr></thead>";
+        $part1 .="<th scope='col'>Edit</th></tr></thead>";
 
         echo $part1;
 
@@ -194,12 +195,75 @@
                 
                 if(isset($row['IS_PRIMARY']) && $row['IS_PRIMARY'] == 1)
                     echo "<div class='modal-body row'>
-                    <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
-                    <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8' readonly></div>";
-                else
-                    echo "<div class='modal-body row'>
-                    <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
-                    <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
+                    <label for='exampleFormControlInput1' class='col-sm-3' hidden>".$row['COLUMN_NAME'].":</label>
+                    <input type='text' value='". $textVal ."' class='form-control offset-sm-2 col-sm-7' readonly hidden></div>";
+                else{
+                    switch($row['COLUMN_NAME']){
+                        case 'Email':
+                            echo "<div class='modal-body row'>
+                            <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                            <input name='v' type='email' value='". $textVal ."' class='form-control offset-sm-2 col-sm-7' required></div>";
+                            break;
+                        case 'Regione':
+                            caricaoption(13);
+                            break;
+                        case 'Colore':
+                            caricaoption(6);
+                            break;
+                        case 'TipoDiCambio':
+                            caricaoption(2);
+                            break;
+                        case 'Carburante':
+                            caricaoption(3);
+                            break;
+                        case 'TipoCarrozzeria':
+                            caricaoption(4);
+                            break;
+                        case 'ClasseEmissioni':
+                            caricaoption(5);
+                            break;
+                        case 'Interni':
+                            caricaoption(7);
+                            break;
+                        case 'Marca':
+                            caricaoption(8);
+                            break;
+                        case 'Stato':
+                            caricaoption(15);
+                            break;
+                        case 'TipoProprietario':
+                            caricaoption(16);
+                            break;
+                        case 'TipoDiTrazione':
+                            caricaoption(17);
+                            break;
+                        case 'Vernice':
+                            caricaoption(19);
+                            break;
+                        case 'Optional':
+                            caricaoption(10);
+                            break;
+                        case 'Sesso':
+                            caricaoption(14);
+                            break;
+                        default:
+                            if($row['DATA_TYPE'] == "varchar")
+                                echo "<div class='modal-body row'>
+                                <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                                <input name='v' type='text' value='". $textVal ."' class='form-control offset-sm-2 col-sm-7 required'></div>";
+                            else if($row['DATA_TYPE'] == "date")
+                                echo "<div class='modal-body row'>
+                                <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                                <input name='v' type='date' value='". $textVal ."' class='form-control offset-sm-2 col-sm-7 required'></div>";
+                            else    
+                                echo "<div class='modal-body row'>
+                                <label for='exampleFormControlInput1' class='col-sm-3 '>".$row['COLUMN_NAME'].":</label>
+                                <input name='v' type='number' min=0 value='". $textVal ."' class='form-control offset-sm-2 col-sm-7 required'></div>";
+                            break;
+                    }
+
+                    
+                }
             }
         }
         else
@@ -208,13 +272,34 @@
             $textVal = $values[$rowindex][$rows[0]['COLUMN_NAME']];
 
             echo "<div class='modal-body row'>
-            <label for='exampleFormControlInput1' class='col-sm-3 ' hidden>".$rows[0]['COLUMN_NAME']." (Vecchio):</label>
-            <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8' readonly hidden></div>";
+            <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Vecchio):</label>
+            <input name='v' type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8 required'></div>";
             echo "<div class='modal-body row'>
             <label for='exampleFormControlInput1' class='col-sm-3 '>".$rows[0]['COLUMN_NAME']." (Nuovo):</label>
-            <input type='text' value='". $textVal ."' class='form-control offset-sm-1 col-sm-8'></div>";
+            <input name='v' type='text' class='form-control offset-sm-1 col-sm-8 required'></div>";
         }
 
+    }
+
+
+    function caricaoption($index){
+        global $tables;
+        $table = $tables[$index]->table;
+        $columns = $tables[$index]->columns;
+
+        $rows = getValues($index);
+
+        
+        $scritta="<div class='modal-body row'>
+                <label for='exampleFormControlInput1' class='col-sm-2 lblModal'>".$columns[0].":</label>
+                <select class='slctModal form-control offset-sm-3 col-sm-7'>";
+        foreach($rows as $row){
+            foreach($row as $row1){
+                $scritta.="<option>".$row1."</option>";
+            }
+        }
+        $scritta.="</select></div>";
+        echo $scritta;
     }
 
     function getTableAndColumnsNames($tableName, $showIdentity)
@@ -223,10 +308,10 @@
         global $db;
         $sql = "";
         if($showIdentity)
-            $sql = "SELECT TABLE_NAME, COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
+            $sql = "SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE from INFORMATION_SCHEMA.COLUMNS
                     where TABLE_NAME = '$tableName'"; // Seleziona il nome della tabella e delle sue colonne.
         else
-            $sql = "SELECT TABLE_NAME, COLUMN_NAME, columnproperty(object_id(TABLE_NAME),COLUMN_NAME,'IsIdentity') as IS_PRIMARY from INFORMATION_SCHEMA.COLUMNS
+            $sql = "SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE, columnproperty(object_id(TABLE_NAME),COLUMN_NAME,'IsIdentity') as IS_PRIMARY from INFORMATION_SCHEMA.COLUMNS
                     WHERE TABLE_NAME = '$tableName'";
         $stmt = $db->prepare($sql);
         $stmt->execute();
