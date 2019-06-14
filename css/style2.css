@@ -10,12 +10,24 @@
     height: 650px;
     overflow-y:scroll;
 }
+
 .tblbutton{
     width: 96%;
     margin-left: 4%;
     border-radius: 0px;
     margin-bottom: 2px;
+    border: 1px solid black;
 }
+
+.tblbutton:hover{
+    border: 2px solid red;
+}
+
+
+.tblbutton:not(:disabled):not(.disabled):focus{
+    background: linear-gradient(to right, #ff4b1f, #ff9068);
+}
+
 body{
     background-color: rgba(211, 211, 211, 0.432);
 }

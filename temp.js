@@ -74,7 +74,7 @@ $(()=>{
         var a = [];
         $($("#modify .modal-body .row").each(function(elem)
         {
-            a.push("'"+$($(this).children().get(1)).val()+"'");
+            a.push("'"+child.val()+"'");
         }));
         // Passa array a formData.
         formData.append('values',a);
@@ -104,7 +104,9 @@ $(()=>{
         var a = [];
         $($("#create .modal-body .row").each(function(elem)
         {
-            a.push("'"+$($(this).children().get(1)).val()+"'");
+            let child = $($(this).children().get(1));
+            if(!child.prop('readonly'))
+                a.push("'"+child.val()+"'");
         }));
         // Passa array a formData.
         formData.append('values',a);
