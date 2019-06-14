@@ -89,6 +89,7 @@ $(()=>{
         }).done(function(html){
             $(".ex2").empty();
             $(".ex2").append(html.slice(0,html.indexOf('<!')));
+            alert("Modifica Avvenuta con Successo");
         });
     });
     
@@ -116,7 +117,8 @@ $(()=>{
             contentType: false
         }).done(function(html){
             $(".ex2").empty();
-            $(".ex2").append(html.slice(0,html.indexOf('<!')));
+            $(".ex2").append(html.slice(0,html.indexOf('<!')));7
+            alert("Creazione Avvenuta con Successo");
         });
     });
         
@@ -139,6 +141,7 @@ $(()=>{
         }).done(function(html){
             $(".ex2").empty();
             $(".ex2").append(html.slice(0,html.indexOf('<!')));
+            alert("Eliminazione Avvenuta con Successo");
         });
     });
 
