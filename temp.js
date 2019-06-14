@@ -1,6 +1,20 @@
 var tabella;
 var selezione;
 
+var tempID=null;
+function animationClick(element, animation){
+    element = $(element);
+    element.click(
+      function() {
+        element.addClass('animated ' + animation);
+        //wait for animation to finish before removing classes
+        window.setTimeout( function(){
+            element.removeClass('animated ' + animation);
+        }, 2000);
+      }
+    );
+};
+
 $(()=>{
 
     $(".create-show").hide();
@@ -26,6 +40,14 @@ $(()=>{
             $(".ex2").append(html.slice(0,html.indexOf('<!')));
         });
     });
+    
+    
+
+    $(".tblbutton").on('click', function(event) {
+        animationClick(,'zoomIn');
+    });
+
+    animationClick($("#"+event.target.id),'zoomIn');
 
     $(".create-show").click(function(e){
         var formData = new FormData();

@@ -32,13 +32,18 @@
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $invalid = '\\|"\',;.:-_()=^[]{}@#°§£<>*/+';
+
     (function() {   // Self-invoked.
         foreach($_POST as $k => &$v) // Value passed by reference.
         {
             $v = trim($v);  // So we are sure it is whitespace free at both ends.    
             // Sanitize string.
-            $v = filter_var($v, FILTER_SANITIZE_ENCODED, FILTER_FLAG_STRIP_HIGH);
-            $v = str_replace( "&#39;", "'", $v ); 
+            for($i = 0; $i < strlen($v); $i++)
+            {
+                if($invalid.contains($v[$i]))
+                    throw new Exception("Carattere invalido inserito: ".$v[$i].".");
+            }
         }
         unset($v);  // Remove referenced variable.
     })();
